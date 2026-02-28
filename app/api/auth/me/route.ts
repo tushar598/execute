@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        return NextResponse.json({ user, role: decoded.role }, { status: 200 });
+        return NextResponse.json({ user, role: decoded.role, tradingMode: decoded.tradingMode || 'credits' }, { status: 200 });
 
     } catch (error) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

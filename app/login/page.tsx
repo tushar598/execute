@@ -11,6 +11,7 @@ export default function Login() {
     const containerRef = useRef(null);
     const router = useRouter();
     const [role, setRole] = useState<'individual' | 'communityadmin' | 'company'>('individual');
+    const [tradingMode, setTradingMode] = useState<'credits' | 'tokens'>('credits');
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -23,9 +24,14 @@ export default function Login() {
                 const res = await fetch('/api/auth/me');
                 if (res.ok) {
                     const data = await res.json();
-                    if (data.role === 'individual') router.push('/user/dashboard');
-                    else if (data.role === 'communityadmin') router.push('/community/dashboard');
-                    else if (data.role === 'company') router.push('/company/dashboard');
+                    const mode = data.tradingMode || 'credits';
+                    if (data.role === 'individual') {
+                        router.push(mode === 'tokens' ? '/solar/seller/dashboard' : '/user/dashboard');
+                    } else if (data.role === 'communityadmin') {
+                        router.push('/community/dashboard');
+                    } else if (data.role === 'company') {
+                        router.push(mode === 'tokens' ? '/solar/buyer/dashboard' : '/company/dashboard');
+                    }
                 }
             } catch (err) {
                 console.error('Auth check failed:', err);
@@ -47,13 +53,17 @@ export default function Login() {
             const res = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ role, identifier, password }),
+                body: JSON.stringify({ role, identifier, password, tradingMode }),
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Login failed');
-            if (role === "individual") router.push('/user/dashboard');
-            else if (role === "communityadmin") router.push('/community/dashboard');
-            else router.push('/company/dashboard');
+            if (role === "individual") {
+                router.push(tradingMode === 'tokens' ? '/solar/seller/dashboard' : '/user/dashboard');
+            } else if (role === "communityadmin") {
+                router.push('/community/dashboard');
+            } else {
+                router.push(tradingMode === 'tokens' ? '/solar/buyer/dashboard' : '/company/dashboard');
+            }
         } catch (err: any) {
             setError(err.message);
         } finally {
@@ -62,9 +72,9 @@ export default function Login() {
     };
 
     const roleLabels: Record<string, string> = {
-        individual: 'Farmer',
+        individual: 'Seller',
         communityadmin: 'Aggregator',
-        company: 'Company',
+        company: 'Buyer',
     };
 
     const inputCls = "w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm text-slate-900";
@@ -97,7 +107,7 @@ export default function Login() {
                         
                         <h2 className="text-4xl xl:text-5xl font-extrabold mb-6 tracking-tight leading-[1.1] drop-shadow-2xl">
                             Offset carbon. <br />
-                            <span className="text-emerald-400">Empower farmers.</span>
+                            <span className="text-emerald-400">Empower sellers.</span>
                         </h2>
                         
                         <p className="text-lg text-emerald-50/90 leading-relaxed font-medium drop-shadow-md">
@@ -145,6 +155,31 @@ export default function Login() {
                             </button>
                         ))}
                     </div>
+
+                    {/* Trading Mode Toggle */}
+                    {role !== 'communityadmin' && (
+                        <div className="mb-8">
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-2 ml-1">I want to deal with</p>
+                            <div className="flex p-1 bg-slate-100/80 rounded-2xl border border-slate-200/50">
+                                {(['credits', 'tokens'] as const).map((m) => (
+                                    <button
+                                        key={m}
+                                        type="button"
+                                        onClick={() => setTradingMode(m)}
+                                        className={`flex-1 py-3 px-2 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 ${
+                                            tradingMode === m
+                                                ? m === 'credits'
+                                                    ? 'bg-white text-emerald-600 shadow-md ring-1 ring-black/5'
+                                                    : 'bg-white text-amber-600 shadow-md ring-1 ring-black/5'
+                                                : 'text-slate-500 hover:text-slate-800'
+                                        }`}
+                                    >
+                                        {m === 'credits' ? '🌿 Carbon Credits' : '☀️ Sun Tokens'}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     {error && (
                         <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm rounded-r-xl font-medium animate-in fade-in slide-in-from-top-2">

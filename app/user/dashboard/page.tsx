@@ -396,7 +396,7 @@ export default function Dashboard() {
                                             <User className="w-5 h-5 sm:w-6 sm:h-6" />
                                         </div>
                                         <div>
-                                            <p className="font-bold text-slate-900 text-sm sm:text-base">{authUser?.username || 'Farmer Profile'}</p>
+                                            <p className="font-bold text-slate-900 text-sm sm:text-base">{authUser?.username || 'Seller Profile'}</p>
                                             <p className="text-[10px] sm:text-xs text-slate-400">
                                                 {authUser?.email || (profile.entry_status + (profile.community_name ? ` · ${profile.community_name}` : ''))}
                                             </p>
@@ -463,7 +463,7 @@ export default function Dashboard() {
                                     </div>
                                     <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-600">Setup Required</span>
                                 </div>
-                                <h3 className="text-lg font-bold text-slate-900">Farmer Profile</h3>
+                                <h3 className="text-lg font-bold text-slate-900">Seller Profile</h3>
                                 <p className="text-slate-500 text-sm mt-1 mb-6">Build your profile to start generating carbon credits.</p>
                                 <button
                                     onClick={() => router.push('/user/onboarding')}

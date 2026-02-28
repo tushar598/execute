@@ -13,11 +13,11 @@ export default function Footer() {
                                 <Leaf className="w-5 h-5 text-white" />
                             </div>
                             <span className="font-bold text-xl tracking-tight">
-                                Carbon<span className="text-emerald-400">Credit</span>
+                                Eco<span className="text-emerald-400">Trade</span>
                             </span>
                         </div>
                         <p className="text-slate-400 max-w-md leading-relaxed text-sm mb-6">
-                            India&apos;s transparent carbon credit marketplace connecting smallholder farmers with corporations. Every transaction is verified, hashed, and traceable from soil to offset.
+                            India&apos;s transparent decentralized energy and carbon marketplace connecting producers with consumers. Every transaction is verified, hashed, and traceable from source to grid.
                         </p>
                         <div className="flex items-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -49,7 +49,7 @@ export default function Footer() {
 
                 {/* Bottom bar */}
                 <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500 text-xs">
-                    <p>© 2026 CarbonCredit Platform. All rights reserved.</p>
+                    <p>© 2026 EcoTrade Platform. All rights reserved.</p>
                     <div className="flex gap-6">
                         <a href="#" className="hover:text-white transition-colors">Twitter</a>
                         <a href="#" className="hover:text-white transition-colors">LinkedIn</a>

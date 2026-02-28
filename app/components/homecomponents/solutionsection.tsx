@@ -11,26 +11,26 @@ if (typeof window !== 'undefined') {
 const solutions = [
     {
         icon: <Sprout className="w-6 h-6" />,
-        title: "Farmer Verification",
-        description: "AI-powered carbon estimation based on land area, soil type, crop rotation, and sustainable farming practices.",
+        title: "Producer Verification",
+        description: "AI-powered carbon estimation and smart meter integrations track green energy generation and sustainable practices.",
         badge: "Step 1",
     },
     {
         icon: <Users className="w-6 h-6" />,
-        title: "Community Aggregation",
-        description: "Community admins pool verified credits from multiple farmers to create larger, more attractive carbon credit bundles.",
+        title: "Decentralized Aggregation",
+        description: "Pool verified credits and Sun Tokens from multiple producers to create larger, impactful trading bundles.",
         badge: "Step 2",
     },
     {
         icon: <Building2 className="w-6 h-6" />,
-        title: "Corporate Offsetting",
-        description: "Companies browse the marketplace, purchase verified credits, and receive tamper-proof retirement certificates.",
+        title: "Corporate & P2P Trading",
+        description: "Companies and consumers browse the marketplace spanning Carbon Credits and Sun Tokens, supporting peer-to-peer exchange.",
         badge: "Step 3",
     },
     {
         icon: <Shield className="w-6 h-6" />,
         title: "Blockchain Audit Trail",
-        description: "Every transaction is SHA-256 hashed, creating an immutable chain of custody from soil to retirement.",
+        description: "Every transaction is SHA-256 hashed, creating an immutable chain of custody from source to grid.",
         badge: "Always On",
     }
 ];
@@ -70,7 +70,7 @@ export default function Solutions() {
                             Platform Features
                         </span>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight tracking-tight">
-                            End-to-end carbon credit lifecycle
+                            End-to-end green energy lifecycle
                         </h2>
                     </div>
                     <a href="/signup" className="hidden md:flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/15 text-sm group">

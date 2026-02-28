@@ -37,7 +37,7 @@ export default function Navbar() {
                         <Leaf className={`w-5 h-5 transition-colors ${scrolled ? 'text-white' : 'text-emerald-300'}`} />
                     </div>
                     <span className={`font-bold text-xl tracking-tight transition-colors duration-300 ${scrolled ? 'text-slate-900' : 'text-white'}`}>
-                        Carbon<span className={`${scrolled ? 'text-teal-600' : 'text-emerald-300'}`}>Credit</span>
+                        Eco<span className={`${scrolled ? 'text-teal-600' : 'text-emerald-300'}`}>Trade</span>
                     </span>
                 </Link>
 

@@ -36,8 +36,8 @@ export default function About() {
                         </div>
                         {/* Floating stat card */}
                         <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-white rounded-2xl shadow-xl shadow-slate-900/10 border border-slate-100 px-5 py-4">
-                            <p className="text-2xl font-bold text-teal-600">₹12.5L+</p>
-                            <p className="text-xs text-slate-500 font-medium">Paid to Farmers</p>
+                            <p className="text-2xl font-bold text-teal-600">₹25.5L+</p>
+                            <p className="text-xs text-slate-500 font-medium">Paid to Producers & Farmers</p>
                         </div>
                         <div className="absolute -top-4 -left-4 w-32 h-32 bg-emerald-50 rounded-full -z-10 hidden lg:block" />
                     </div>
@@ -48,18 +48,18 @@ export default function About() {
                             How It Works
                         </span>
                         <h2 className="about-text text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-slate-900 tracking-tight">
-                            From soil to offset — a transparent carbon journey
+                            From source to grid — a transparent energy journey
                         </h2>
                         <p className="about-text text-base sm:text-lg text-slate-500 leading-relaxed mb-8">
-                            Our platform connects <span className="text-slate-900 font-semibold">smallholder farmers</span> practicing sustainable agriculture with <span className="text-slate-900 font-semibold">corporations</span> seeking verified carbon credits. Every transaction is audited, hashed, and traceable.
+                            Our dual marketplace connects <span className="text-slate-900 font-semibold">renewable energy producers</span> and <span className="text-slate-900 font-semibold">sustainable farmers</span> with <span className="text-slate-900 font-semibold">consumers and corporations</span>. Trade Sun Tokens from excess solar power or verified Carbon Credits from farming. Every transaction is audited, hashed, and traceable.
                         </p>
 
                         <div className="about-text space-y-3 mb-8">
                             {[
-                                'Farmers register land & sustainable practices',
-                                'AI model estimates carbon sequestration',
-                                'Credits are verified and listed on marketplace',
-                                'Companies buy credits — 80% goes direct to farmer',
+                                'Producers & Farmers register energy or land practices',
+                                'AI estimates carbon & smart meters track green energy',
+                                'Credits & Sun Tokens listed on decentralized marketplace',
+                                'Buyers transact peer-to-peer — 80-100% direct to producers',
                             ].map((step, i) => (
                                 <div key={i} className="flex items-start gap-3">
                                     <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />

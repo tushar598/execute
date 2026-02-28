@@ -29,7 +29,8 @@ const companySchema = z.object({
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { role, referralCode, ...userData } = body;
+        const { role, referralCode, tradingMode: rawTradingMode, ...userData } = body;
+        const tradingMode = rawTradingMode === 'tokens' ? 'tokens' : 'credits';
 
         await dbConnect();
 
@@ -61,7 +62,7 @@ export async function POST(req: NextRequest) {
                 role: role,
             });
 
-            payload = { id: newUser._id, role: role, email: newUser.email };
+            payload = { id: newUser._id, role: role, email: newUser.email, tradingMode };
 
             // ---- Referral credit logic ----
             if (referralCode && typeof referralCode === 'string' && referralCode.trim()) {
@@ -109,7 +110,7 @@ export async function POST(req: NextRequest) {
                 password: hashedPassword,
             });
 
-            payload = { id: newUser._id, role: 'company', email: newUser.companyEmail };
+            payload = { id: newUser._id, role: 'company', email: newUser.companyEmail, tradingMode };
 
         } else {
             return NextResponse.json({ error: 'Invalid role provided' }, { status: 400 });
@@ -128,11 +129,21 @@ export async function POST(req: NextRequest) {
             path: '/',
         });
 
+        // Set tradingMode cookie (readable by client)
+        cookieStore.set('tradingMode', tradingMode, {
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60,
+            path: '/',
+        });
+
         return NextResponse.json({
             message: 'Registration successful',
             user: {
                 id: (newUser as any)._id,
                 role,
+                tradingMode,
                 email: (role === 'individual' || role === 'communityadmin') ? (newUser as any).email : (newUser as any).companyEmail,
             }
         }, { status: 201 });

@@ -10,9 +10,9 @@ if (typeof window !== 'undefined') {
 }
 
 const stats = [
-    { target: 5000, suffix: '+', label: 'Tonnes CO₂e Offset', desc: 'Verified carbon credits retired through our platform', icon: TrendingUp, color: 'emerald' },
-    { target: 200, suffix: '+', label: 'Farmers Onboarded', desc: 'Smallholder farmers earning from sustainable agriculture', icon: Sprout, color: 'teal' },
-    { target: 50, suffix: '+', label: 'Companies Buying', desc: 'Corporations meeting ESG goals with verified credits', icon: Building2, color: 'blue' },
+    { target: 5000, suffix: '+', label: 'MWh & CO₂e Traded', desc: 'Verified carbon credits and green energy exchanged', icon: TrendingUp, color: 'emerald' },
+    { target: 200, suffix: '+', label: 'Producers Onboarded', desc: 'Farmers and solar owners earning directly', icon: Sprout, color: 'teal' },
+    { target: 50, suffix: '+', label: 'Active Buyers', desc: 'Consumers and corporations meeting green goals', icon: Building2, color: 'blue' },
 ];
 
 export default function Stats() {

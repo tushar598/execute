@@ -124,7 +124,7 @@ export default function GetCarbonCredit() {
                         </div>
                         <div>
                             <h1 className="text-sm font-bold text-slate-900">Carbon Credit Verification</h1>
-                            <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-none">Individual Farmer</p>
+                            <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-none">Individual Seller</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-100 rounded-full px-3 py-1.5">

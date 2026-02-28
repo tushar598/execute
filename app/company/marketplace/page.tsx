@@ -105,7 +105,7 @@ async function generateCertificate(summary: PurchaseSummary) {
 
     const beneficiaryName = summary.poolType === 'community'
         ? (summary.communityName || 'Community Project')
-        : (summary.farmerName || 'Farmer Project');
+        : (summary.farmerName || 'Seller Project');
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(20);
@@ -388,7 +388,7 @@ export default function CompanyMarketplace() {
                         <p className="text-2xl font-bold text-teal-600">{communityCount}</p>
                     </div>
                     <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Farmers</p>
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Sellers</p>
                         <p className="text-2xl font-bold text-emerald-600">{farmerCount}</p>
                     </div>
                 </div>
@@ -468,7 +468,7 @@ export default function CompanyMarketplace() {
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-2">
                                                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
-                                                <span className="text-xs text-emerald-800 font-medium">Direct to Farmers' Accounts</span>
+                                                <span className="text-xs text-emerald-800 font-medium">Direct to Sellers' Accounts</span>
                                                 <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded-full">80%</span>
                                             </div>
                                             <span className="text-xs font-bold text-emerald-900">₹{farmerShare.toLocaleString()}</span>
@@ -562,7 +562,7 @@ export default function CompanyMarketplace() {
                                                     ? 'bg-teal-50 text-teal-700 border border-teal-100'
                                                     : 'bg-emerald-50 text-emerald-700 border border-emerald-100'
                                                     }`}>
-                                                    {isCommunity ? '🏘 Community' : '🌾 Farmer'}
+                                                    {isCommunity ? '🏨 Community' : '🌾 Seller'}
                                                 </span>
                                                 <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-600 uppercase tracking-wider">
                                                     ● Available

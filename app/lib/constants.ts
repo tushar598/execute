@@ -24,3 +24,8 @@ export const CREDIT_REQUEST_REASONS = [
 ] as const;
 
 export type CreditRequestReason = (typeof CREDIT_REQUEST_REASONS)[number];
+
+// ── Sun Token Constants ─────────────────────────────────────────────────
+export const MARKET_PRICE_PER_TOKEN = 7.5; // ≈₹7.5 per Sun Token
+export const SUN_TOKEN_ENERGY_RATE = 1;    // 1 kWh per Sun Token
+export const GOVT_PROCESSING_FEE_PCT = 5;  // 5% govt processing fee

@@ -11,12 +11,13 @@ const loginSchema = z.object({
     role: z.enum(['individual', 'communityadmin', 'company']),
     identifier: z.string().min(1, 'Email or ID is required'), // can be email or userId/companyId
     password: z.string().min(1, 'Password is required'),
+    tradingMode: z.enum(['credits', 'tokens']).optional().default('credits'),
 });
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { role, identifier, password } = loginSchema.parse(body);
+        const { role, identifier, password, tradingMode } = loginSchema.parse(body);
 
         await dbConnect();
 
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
                 return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
             }
 
-            payload = { id: user._id, role: role, email: user.email };
+            payload = { id: user._id, role: role, email: user.email, tradingMode };
 
         } else if (role === 'company') {
             // Find company by email or companyId
@@ -60,7 +61,7 @@ export async function POST(req: NextRequest) {
                 return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
             }
 
-            payload = { id: user._id, role: 'company', email: user.companyEmail };
+            payload = { id: user._id, role: 'company', email: user.companyEmail, tradingMode };
         }
 
         // Generate JWT
@@ -76,11 +77,21 @@ export async function POST(req: NextRequest) {
             path: '/',
         });
 
+        // Set tradingMode cookie (readable by client)
+        cookieStore.set('tradingMode', tradingMode, {
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60,
+            path: '/',
+        });
+
         return NextResponse.json({
             message: 'Login successful',
             user: {
                 id: (user as any)._id,
                 role,
+                tradingMode,
                 email: (role === 'individual' || role === 'communityadmin') ? (user as any).email : (user as any).companyEmail,
             }
         }, { status: 200 });

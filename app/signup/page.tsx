@@ -11,6 +11,7 @@ export default function Signup() {
     const containerRef = useRef(null);
     const router = useRouter();
     const [role, setRole] = useState<'individual' | 'communityadmin' | 'company'>('individual');
+    const [tradingMode, setTradingMode] = useState<'credits' | 'tokens'>('credits');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -56,13 +57,17 @@ export default function Signup() {
             const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(registrationData),
+                body: JSON.stringify({ ...registrationData, tradingMode }),
             });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Registration failed');
-            if (role === 'individual') router.push('/user/dashboard');
-            else if (role === 'communityadmin') router.push('/community/dashboard');
-            else router.push('/company/dashboard');
+            if (role === 'individual') {
+                router.push(tradingMode === 'tokens' ? '/solar/seller/dashboard' : '/user/dashboard');
+            } else if (role === 'communityadmin') {
+                router.push('/community/dashboard');
+            } else {
+                router.push(tradingMode === 'tokens' ? '/solar/buyer/dashboard' : '/company/dashboard');
+            }
         } catch (err: any) {
             setError(err.message);
         } finally {
@@ -71,9 +76,9 @@ export default function Signup() {
     };
 
     const roleLabels: Record<string, string> = {
-        individual: 'Farmer',
+        individual: 'Seller',
         communityadmin: 'Aggregator',
-        company: 'Company',
+        company: 'Buyer',
     };
 
     const inputCls = "w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm";
@@ -89,13 +94,13 @@ export default function Signup() {
                 />
                 {/* Visual Overlay Layer */}
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-slate-900/40 to-transparent backdrop-blur-[1px]" />
-                
+
                 <div className="relative h-full flex flex-col justify-between p-12 xl:p-16 text-white z-10">
                     <Link href="/" className="flex items-center gap-2 hover:text-emerald-300 transition-all w-fit text-sm font-semibold drop-shadow-md">
                         <ArrowLeft className="w-4 h-4" />
                         Back to Home
                     </Link>
-                    
+
                     <div className="signup-content max-w-lg">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-12 h-12 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl flex items-center justify-center shadow-xl">
@@ -103,12 +108,13 @@ export default function Signup() {
                             </div>
                             <span className="font-bold text-2xl tracking-tight drop-shadow-lg">Carbon<span className="text-emerald-400">Credit</span></span>
                         </div>
-                        
+
                         <h2 className="text-4xl xl:text-5xl font-extrabold mb-6 tracking-tight leading-[1.1] drop-shadow-2xl">
                             A greener future <br />
                             <span className="text-emerald-400">starts with you.</span>
                         </h2>
-                        
+
+
                         <p className="text-lg text-emerald-50/90 leading-relaxed font-medium max-w-md drop-shadow-md">
                             Join India&apos;s leading carbon credit platform. Empowering farmers, aggregators, and corporations to build a sustainable tomorrow.
                         </p>
@@ -154,6 +160,30 @@ export default function Signup() {
                             </button>
                         ))}
                     </div>
+
+                    {/* Trading Mode Toggle */}
+                    {role !== 'communityadmin' && (
+                        <div className="mb-8">
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-2 ml-1">I want to deal with</p>
+                            <div className="flex p-1 bg-slate-100/80 rounded-2xl border border-slate-200/50">
+                                {(['credits', 'tokens'] as const).map((m) => (
+                                    <button
+                                        key={m}
+                                        type="button"
+                                        onClick={() => setTradingMode(m)}
+                                        className={`flex-1 py-3 px-2 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 ${tradingMode === m
+                                                ? m === 'credits'
+                                                    ? 'bg-white text-emerald-600 shadow-md ring-1 ring-black/5'
+                                                    : 'bg-white text-amber-600 shadow-md ring-1 ring-black/5'
+                                                : 'text-slate-500 hover:text-slate-800'
+                                            }`}
+                                    >
+                                        {m === 'credits' ? '🌿 Carbon Credits' : '☀️ Sun Tokens'}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     {error && (
                         <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm rounded-r-xl font-medium animate-in fade-in slide-in-from-top-2">

@@ -90,7 +90,7 @@ export default function Hero() {
                 <div className="overflow-hidden mb-6">
                     <div className="hero-text-line inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full">
                         <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-xs font-bold text-emerald-300 uppercase tracking-widest">India&apos;s Carbon Credit Platform</span>
+                        <span className="text-xs font-bold text-emerald-300 uppercase tracking-widest">India&apos;s Dual Green Energy & Carbon Platform</span>
                     </div>
                 </div>
 
@@ -98,12 +98,12 @@ export default function Hero() {
                 <div className="max-w-5xl">
                     <div className="overflow-hidden">
                         <h1 className="hero-text-line text-4xl sm:text-6xl lg:text-8xl font-bold tracking-tighter leading-[0.95] mb-2 sm:mb-3">
-                            Offset Carbon.
+                            Trade Energy.
                         </h1>
                     </div>
                     <div className="overflow-hidden">
                         <h1 className="hero-text-line text-4xl sm:text-6xl lg:text-8xl font-bold tracking-tighter leading-[0.95] mb-2 sm:mb-3">
-                            Empower <span className="text-emerald-400">Farmers.</span>
+                            Offset Carbon.
                         </h1>
                     </div>
                     <div className="overflow-hidden">
@@ -116,14 +116,14 @@ export default function Hero() {
                 {/* Sub-text + CTA */}
                 <div className="hero-text-line max-w-xl mb-10 sm:mb-14">
                     <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-6 sm:mb-8">
-                        A transparent marketplace connecting Indian farmers with corporations seeking verified carbon credits. Every rupee goes directly to sustainable agriculture.
+                        A decentralized marketplace connecting renewable energy producers and sustainable farmers with consumers and corporations. Trade Sun Tokens or verified Carbon credits peer-to-peer.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <Link
                             href="/signup"
                             className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-2xl transition-all shadow-xl shadow-teal-600/25 text-sm sm:text-base"
                         >
-                            Start Offsetting <ArrowRight className="w-4 h-4" />
+                            Start Trading <ArrowRight className="w-4 h-4" />
                         </Link>
                         <Link
                             href="/login"

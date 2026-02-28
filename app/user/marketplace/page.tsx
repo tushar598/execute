@@ -35,7 +35,7 @@ export default function FarmerMarketplace() {
                 const data = await res.json();
                 setAvailableCredits(data.credits || 0);
                 setSellAmount(data.credits || 0);
-                setFarmerName(data.profile?.userId?.username || 'Farmer');
+                setFarmerName(data.profile?.userId?.username || 'Seller');
             } catch (e) {
                 console.error('Failed to load farmer data', e);
             } finally {
