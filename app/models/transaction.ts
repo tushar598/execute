@@ -33,7 +33,7 @@ TransactionSchema.index({ projectId: 1 })
 TransactionSchema.index({ createdAt: -1 })
 
 // Force reload of schema in dev
-if (mongoose.models && mongoose.models.Transaction) {
+if (process.env.NODE_ENV === 'development' && mongoose.models && mongoose.models.Transaction) {
     delete mongoose.models.Transaction;
 }
 
