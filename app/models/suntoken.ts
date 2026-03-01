@@ -16,27 +16,3 @@ export interface ISunToken extends Document {
     updatedAt: Date;
 }
 
-const SunTokenSchema: Schema<ISunToken> = new Schema(
-    {
-        userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
-            unique: true,
-        },
-        totalEnergyProduced: { type: Number, default: 0 },
-        totalEnergyConsumed: { type: Number, default: 0 },
-        leftoverEnergy: { type: Number, default: 0 },
-        tokensGenerated: { type: Number, default: 0 },
-        tokensAvailable: { type: Number, default: 0 },
-        tokensSold: { type: Number, default: 0 },
-        balance: { type: Number, default: 0 },
-    },
-    { timestamps: true }
-);
-
-const SunToken: Model<ISunToken> =
-    mongoose.models.SunToken ||
-    mongoose.model<ISunToken>('SunToken', SunTokenSchema);
-
-export default SunToken;

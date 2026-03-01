@@ -20,3 +20,72 @@ export interface ISolarProfile extends Document {
     updatedAt: Date;
 }
 
+const SolarProfileSchema: Schema<ISolarProfile> = new Schema(
+    {
+        userId: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            unique: true,
+            refPath: 'userType',
+        },
+        userType: {
+            type: String,
+            enum: ['individual', 'company'],
+            required: true,
+        },
+        address: {
+            type: String,
+            required: [true, 'Address is required'],
+            trim: true,
+        },
+        coordinates: {
+            lat: { type: Number, required: true },
+            lng: { type: Number, required: true },
+        },
+        state: {
+            type: String,
+            required: [true, 'State is required'],
+            trim: true,
+        },
+        digitalMeterNumber: {
+            type: String,
+            required: [true, 'Digital meter number is required'],
+            trim: true,
+        },
+        electricityBill: {
+            data: Buffer,
+            contentType: String,
+        },
+        bankAccountNo: {
+            type: String,
+            required: [true, 'Bank account number is required'],
+            trim: true,
+        },
+        IFSCNo: {
+            type: String,
+            required: [true, 'IFSC code is required'],
+            trim: true,
+        },
+        aadharCardNo: {
+            type: String,
+            required: [true, 'Aadhar card number is required'],
+            trim: true,
+        },
+        panCardNo: {
+            type: String,
+            required: [true, 'PAN card number is required'],
+            trim: true,
+        },
+        hasdone_process: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    { timestamps: true }
+);
+
+const SolarProfile: Model<ISolarProfile> =
+    mongoose.models.SolarProfile ||
+    mongoose.model<ISolarProfile>('SolarProfile', SolarProfileSchema);
+
+export default SolarProfile;
