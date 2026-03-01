@@ -1,570 +1,693 @@
-# 🌿 Grento — Carbon Credit Marketplace Platform
+<p align="center">
+  <img src="https://img.shields.io/badge/Hackathon-.Execute-blueviolet?style=for-the-badge&logo=hackthebox&logoColor=white" alt="Hackathon Badge" />
+  <img src="https://img.shields.io/badge/Duration-36%20Hours-orange?style=for-the-badge" alt="Duration" />
+  <img src="https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge" alt="Status" />
+</p>
 
-A full-stack **carbon credit trading platform** built with **Next.js 16**, **MongoDB**, and **Google Gemini AI**. The platform connects **farmers**, **community admins**, **aggregators**, and **companies** in a transparent carbon credit supply chain — from credit generation on farms all the way to corporate purchase, with blockchain-style SHA-256 audit logging at every step.
+<h1 align="center">🌿 EcoTrade — Renewable Energy Marketplace Portal</h1>
+
+<p align="center">
+  <b>India's first dual-marketplace platform for peer-to-peer green energy trading and verified carbon credit exchange — connecting renewable energy producers, sustainable farmers, consumers, and corporations.</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Gemini%20AI-Integrated-4285F4?logo=google" alt="Gemini AI" />
+  <img src="https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss" alt="TailwindCSS" />
+</p>
 
 ---
 
-## 📑 Table of Contents
+## 👥 Team Details
 
+| | Name | Role |
+|---|---|---|
+| 🏆 | **Tushar Singh Chouhan** | Team Lead |
+| 👩‍💻 | **Sheetal Pandey** | Team Member |
+| 👨‍💻 | **Karan Verma** | Team Member |
+
+**Team Name:** `Hustlers`
+**Hackathon:** `.Execute` — 36 Hours
+**Problem Statement:** Renewable Energy Marketplace Portal
+
+---
+
+## 📖 Table of Contents
+
+- [Problem Statement](#-problem-statement)
+- [Our Solution — EcoTrade](#-our-solution--ecotrade)
+- [Key Features](#-key-features)
 - [Architecture Overview](#-architecture-overview)
-- [Project Structure](#-project-structure)
 - [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Database Schema](#-database-schema-21-models)
+- [API Routes](#-api-routes-47-endpoints)
+- [User Roles & Flows](#-user-roles--flows)
+- [AI Integration](#-ai-integration-gemini)
+- [Security & Audit](#-security--audit)
+- [Pages & UI](#-pages--ui)
 - [Environment Variables](#-environment-variables)
-- [Roles & Workflows](#-roles--workflows)
-  - [1. Farmer / User](#1-farmer--user)
-  - [2. Community Admin](#2-community-admin)
-  - [3. Aggregator](#3-aggregator)
-  - [4. Company (Buyer)](#4-company-buyer)
-- [Data Models](#-data-models)
-- [API Reference](#-api-reference)
-  - [Authentication](#authentication)
-  - [User / Farmer APIs](#user--farmer-apis)
-  - [Community Admin APIs](#community-admin-apis)
-  - [Community Data APIs](#community-data-apis)
-  - [Aggregator APIs](#aggregator-apis)
-  - [Company APIs](#company-apis)
-  - [AI-Powered APIs](#ai-powered-apis)
-  - [Transaction & Audit APIs](#transaction--audit-apis)
-- [Core Business Logic](#-core-business-logic)
-  - [Credit Distribution (AI)](#credit-distribution-ai)
-  - [Payment Cascade (Buy Project)](#payment-cascade-buy-project)
-  - [Blockchain-Style Audit Trail](#blockchain-style-audit-trail)
-- [Frontend Pages](#-frontend-pages)
-- [Scripts](#-scripts)
 - [Getting Started](#-getting-started)
+- [Use Cases](#-use-cases)
+- [Screenshots](#-screenshots)
+- [Future Scope](#-future-scope)
+
+---
+
+## 🎯 Problem Statement
+
+> **Design a web platform that connects renewable energy producers (solar rooftop owners, biogas plants, wind farms) with consumers or investors.**
+
+### Objectives
+
+| Objective | How EcoTrade Solves It |
+|---|---|
+| Promote decentralized energy exchange | Sun Token marketplace enables P2P solar energy trading with geo-located listings |
+| Enable peer-to-peer green energy trading | Direct producer-to-consumer transactions without intermediary dependency |
+| Encourage community-based sustainability | Community system lets farmer groups collectively pool, verify, and sell carbon credits |
+
+---
+
+## 💡 Our Solution — EcoTrade
+
+**EcoTrade** is a full-stack, production-grade web platform that operates **two interconnected marketplaces** on a single unified portal:
+
+### 1. ☀️ Sun Token Marketplace (Energy Trading)
+Solar rooftop owners register their installations, track energy production vs. consumption, and tokenize **surplus energy** into **Sun Tokens**. These tokens are listed on a geo-located marketplace where consumers and companies can purchase clean energy peer-to-peer. Transactions go through a simulated government review pipeline and include SHA-256 audit hashing.
+
+### 2. 🌱 Carbon Credit Marketplace (Carbon Offsetting)
+Smallholder farmers and farming communities register their land, practices, and crops. **Google Gemini AI** calculates their carbon sequestration, minting verified carbon credits. These credits can be sold individually on the marketplace or aggregated into larger project bundles for corporate buyers. Every transaction produces a blockchain-style audit trail with immutable hash chaining.
+
+---
+
+## ✨ Key Features
+
+### Energy Trading (Sun Tokens)
+- 🔋 **Solar Onboarding** — KYC-verified producer registration with digital meter, coordinates, and bank details
+- ⚡ **Tokenization Engine** — Converts leftover kWh into Sun Tokens (1 kWh = 1 Token)
+- 🗺️ **Geo-Located Marketplace** — Interactive Leaflet.js map showing nearby energy listings
+- 🛒 **P2P Purchasing** — Buyer purchases with multi-step government processing pipeline (`processing → govt_review → delivered → payment_sent → completed`)
+- 💰 **Direct Seller Payouts** — Revenue flows directly to the seller's registered bank account
+
+### Carbon Credit Trading
+- 🧑‍🌾 **Farmer Onboarding** — Detailed land profiling (soil type, crops, practices, Aadhar/PAN, GIS coordinates)
+- 🤖 **AI-Powered Credit Estimation** — Google Gemini estimates CO₂ sequestration based on land area, soil, practices, and crops
+- 👥 **Community Pooling** — Community admins manage farmer groups, collectively generate and distribute credits
+- 🏢 **Aggregator System** — Aggregators bundle community credits into project proposals for corporate buyers
+- 🏭 **Corporate Buyer Dashboard** — Companies browse aggregated projects, purchase credits, and track ESG offset progress
+- 📊 **Individual Marketplace** — Farmers can also list and sell credits directly to consumers
+
+### Platform-Wide
+- 🔐 **JWT Authentication** — Secure login for Individuals, Community Admins, Companies, with role-based routing
+- 🔗 **SHA-256 Audit Chain** — Every action (credit generated, listed, purchased, sold) creates an immutable audit log with `txHash` and `previousHash`
+- 📄 **AI Climate Reports** — Gemini generates 5-year climate history PDFs with monthly breakdowns for any lat/lng
+- 💡 **AI Smart Suggestions** — Personalized farming recommendations powered by Gemini (70+ fallback suggestions)
+- 🎫 **Referral System** — Users generate unique 20-character referral codes to invite others
+- 🗺️ **Interactive Maps** — Leaflet.js integration for land visualization and energy listing locations
+- 🎬 **GSAP Animations** — Smooth, cinematic landing page with scroll-triggered animations
 
 ---
 
 ## 🏗 Architecture Overview
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                        FRONTEND (Next.js)                        │
-│  Landing Page │ Login/Signup │ Role Selection │ Dashboards        │
-└──────────────────────────┬───────────────────────────────────────┘
-                           │ API Routes (app/api/*)
-┌──────────────────────────▼───────────────────────────────────────┐
-│                      BACKEND (API Routes)                        │
-│  Auth │ Users │ Community │ CommunityAdmin │ Aggregator │ Company│
-│  AI (Gemini) │ Transactions │ AuditLogs                         │
-└──────────────────────────┬───────────────────────────────────────┘
-                           │ Mongoose ODM
-┌──────────────────────────▼───────────────────────────────────────┐
-│                     DATABASE (MongoDB Atlas)                     │
-│  16 Collections: User, UserProfile, Credit, Community,           │
-│  CommunityAdmin, CommunityCarbonCredits, CarbonMarket,           │
-│  CommunityAggregatorDeal, AggregatorProfile, AggregatorDeals,    │
-│  AggregatorProject, Company, CompanyDeals, Transaction,          │
-│  AuditLog, MemberPayout                                          │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-**Data flow:**
-
-```
-Farmers → generate credits (AI) → Community pools credits
-→ Listed on Carbon Market → Aggregator proposes deal → Community accepts
-→ Aggregator bundles into Project → Company buys project
-→ Payment cascades back to individual farmer wallets
-```
-
----
-
-## 📁 Project Structure
-
-```
-demowallet/
-├── app/
-│   ├── layout.tsx                  # Root layout (Geist fonts, global CSS)
-│   ├── page.tsx                    # Landing page (Hero, About, Stats, Solutions)
-│   ├── globals.css                 # Global styles (Tailwind)
-│   │
-│   ├── api/                        # ── Backend API Routes ──
-│   │   ├── auth/
-│   │   │   ├── register/route.ts   # POST — Register user or company
-│   │   │   ├── login/route.ts      # POST — Login (organisation / company)
-│   │   │   ├── me/route.ts         # GET  — Get current session user
-│   │   │   └── logout/route.ts     # POST — Clear auth cookie
-│   │   │
-│   │   ├── users/
-│   │   │   ├── onboarding/route.ts    # POST — Farmer profile onboarding (multipart)
-│   │   │   ├── getprofile/route.ts    # GET  — Fetch profile + credits + balance
-│   │   │   ├── updateprofile/route.ts # PATCH — Update profile fields/files
-│   │   │   └── my_payouts/route.ts    # GET  — Fetch all payout history
-│   │   │
-│   │   ├── communityadmin/
-│   │   │   ├── onboarding/route.ts         # POST — Create community + admin link
-│   │   │   ├── getcommunityadmin/route.ts  # GET  — Fetch admin profile + community
-│   │   │   ├── updatecommunitydata/route.ts# PATCH — Update community (admin only)
-│   │   │   └── verifycommunityadmin/route.ts# GET  — Check if user is community admin
-│   │   │
-│   │   ├── community/
-│   │   │   ├── getcommunity/route.ts                          # GET  — List all communities
-│   │   │   ├── getspecific_community/route.ts                 # GET  — Get single community
-│   │   │   ├── getspecific_community_memebers/route.ts        # GET  — Get community member users
-│   │   │   ├── get_specific_community_members_userprofile/route.ts # GET — Members' profiles + total land
-│   │   │   ├── getcommunitycredit/route.ts                    # GET  — Community carbon credit count
-│   │   │   ├── setcommunitymember/route.ts                    # POST — Add user to community
-│   │   │   ├── list_on_market/route.ts                        # POST — List credits on Carbon Market
-│   │   │   ├── get_community_aggregator_proposal/route.ts     # GET/POST — View/Accept/Reject deals
-│   │   │   └── sale_transactions/route.ts                     # GET  — Community sale history (admin)
-│   │   │
-│   │   ├── aggregator/
-│   │   │   ├── onboarding/route.ts          # POST — Register aggregator (DealerId)
-│   │   │   ├── verifyaggregator/route.ts    # GET  — Check if user is aggregator
-│   │   │   ├── aggregatordeal/route.ts      # POST — Propose deal to community
-│   │   │   ├── get_marketplace_data/route.ts# GET  — Browse Carbon Market listings
-│   │   │   ├── projects/route.ts            # GET/POST — View/Create bundled projects
-│   │   │   ├── analytics/route.ts           # GET  — Aggregator dashboard analytics
-│   │   │   └── sold_projects/route.ts       # GET  — Sold projects with payout breakdown
-│   │   │
-│   │   ├── company/
-│   │   │   ├── marketplace/route.ts         # GET  — Browse open aggregator projects
-│   │   │   ├── buy_project/route.ts         # POST — Purchase project (payment cascade)
-│   │   │   └── totalaggregator/route.ts     # GET  — Company dashboard stats
-│   │   │
-│   │   ├── ai/
-│   │   │   ├── suggestion/route.ts               # POST — AI farming suggestions (Gemini)
-│   │   │   ├── getclimatehistory/route.ts         # POST — Climate report PDF (Gemini)
-│   │   │   └── divide_community_crdits/route.ts   # POST — AI credit distribution
-│   │   │
-│   │   ├── transactions/
-│   │   │   ├── all_transactions/route.ts     # GET — All transactions for an entity
-│   │   │   └── specific_transactions/route.ts# GET — Single transaction by ID
-│   │   │
-│   │   └── auditlogs/route.ts               # GET — Fetch audit logs with chain verification
-│   │
-│   ├── models/                     # ── Mongoose Data Models (16 schemas) ──
-│   │   ├── user.ts                 # User account (userId, email, phone, password)
-│   │   ├── userprofile.ts          # Farmer profile (land, crops, soil, KYC docs)
-│   │   ├── credit.ts              # Credit wallet (credit count + fiat balance)
-│   │   ├── community.ts           # Community (members, admin, practices, location)
-│   │   ├── communityadmin.ts      # Normalized link: userId ↔ community_id
-│   │   ├── communitycarboncredits.ts # Community aggregate credit pool
-│   │   ├── communityaggregatordeal.ts# Deal proposals from aggregators to communities
-│   │   ├── carbonmarket.ts        # Global marketplace listing (community/individual)
-│   │   ├── company.ts             # Company account (name, email, companyId)
-│   │   ├── companydeals.ts        # Purchase records (company → aggregator project)
-│   │   ├── aggregatorprofile.ts   # Aggregator profile (userId ↔ DealerId)
-│   │   ├── aggregatordeals.ts     # Accepted deals ledger (community/individual)
-│   │   ├── aggregatorproject.ts   # Bundled project for sale to companies
-│   │   ├── transaction.ts         # Financial transactions (sale/purchase/transfer)
-│   │   ├── auditlogs.ts          # SHA-256 chained audit trail
-│   │   └── memberpayout.ts       # Per-member earnings from project sales
-│   │
-│   ├── lib/                        # ── Utilities ──
-│   │   ├── db.ts                   # MongoDB connection (cached for HMR)
-│   │   └── jwt.ts                  # JWT sign/verify helpers
-│   │
-│   ├── components/                 # ── Reusable Components ──
-│   │   ├── LeafletMap.tsx          # Interactive map component
-│   │   └── homecomponents/
-│   │       ├── Navbar.tsx          # Navigation bar
-│   │       ├── Footer.tsx          # Footer
-│   │       ├── herosection.tsx     # Hero landing section
-│   │       ├── aboutsection.tsx    # About section
-│   │       ├── solutionsection.tsx # Solutions section
-│   │       └── statesection.tsx    # Statistics section
-│   │
-│   ├── login/page.tsx              # Login page
-│   ├── signup/page.tsx             # Registration page
-│   ├── selectrole/page.tsx         # Role selection (after registration)
-│   │
-│   ├── user/                       # ── Farmer Pages ──
-│   │   ├── dashboard/page.tsx      # Farmer dashboard
-│   │   ├── onboarding/page.tsx     # Profile onboarding form
-│   │   └── updateprofile/page.tsx  # Profile update form
-│   │
-│   ├── community/                  # ── Community Admin Pages ──
-│   │   ├── dashboard/page.tsx      # Community dashboard
-│   │   ├── onboarding/page.tsx     # Community creation form
-│   │   ├── getcarboncredit/page.tsx# Credit generation (triggers AI distribution)
-│   │   └── communitymarketplace/page.tsx # Marketplace view
-│   │
-│   ├── aggregator/                 # ── Aggregator Pages ──
-│   │   ├── dashboard/page.tsx      # Aggregator dashboard with analytics
-│   │   ├── onboarding/page.tsx     # Aggregator registration
-│   │   ├── marketplace/page.tsx    # Browse Carbon Market to propose deals
-│   │   └── project/page.tsx        # Create and manage bundled projects
-│   │
-│   └── company/                    # ── Company Pages ──
-│       ├── dashboard/page.tsx      # Company dashboard with stats
-│       └── marketplace/page.tsx    # Browse and purchase aggregator projects
-│
-├── scripts/
-│   ├── migrate_credits.js          # Migration: credit → balance for existing records
-│   └── inspect_credits.js          # Debug: inspect credit records
-│
-├── public/                         # Static assets (SVGs)
-├── package.json                    # Dependencies and scripts
-├── tsconfig.json                   # TypeScript configuration
-├── next.config.ts                  # Next.js configuration
-├── postcss.config.mjs              # PostCSS (Tailwind)
-├── eslint.config.mjs               # ESLint configuration
-└── .env                            # Environment variables
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         EcoTrade Platform                               │
+├──────────────────────────────┬──────────────────────────────────────────┤
+│     ☀️ Sun Token Marketplace  │    🌱 Carbon Credit Marketplace          │
+│                              │                                          │
+│  Solar Seller ──→ Tokenize   │  Farmer ──→ AI Verify ──→ Mint Credits   │
+│       ↓                      │       ↓                                  │
+│  List on Market (Geo-Map)    │  Individual List OR Community Pool        │
+│       ↓                      │       ↓                    ↓              │
+│  Buyer Purchase (P2P)        │  Direct P2P Sale    Aggregator Bundle     │
+│       ↓                      │       ↓                    ↓              │
+│  Govt Review Pipeline        │  Audit Log Chain    Company Purchase      │
+│       ↓                      │       ↓                    ↓              │
+│  Seller Payout               │  Farmer Payout      Member Payouts       │
+├──────────────────────────────┴──────────────────────────────────────────┤
+│                        Shared Infrastructure                            │
+│  ┌────────┐ ┌──────────┐ ┌──────────┐ ┌────────┐ ┌──────────────────┐  │
+│  │ Auth   │ │ Audit    │ │ Referral │ │ AI     │ │ Transactions     │  │
+│  │ (JWT)  │ │ (SHA256) │ │ System   │ │(Gemini)│ │ (Indexed Logs)   │  │
+│  └────────┘ └──────────┘ └──────────┘ └────────┘ └──────────────────┘  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                     MongoDB (Mongoose ODM)                              │
+│          21 Collections  •  Indexed Queries  •  Cached Connection       │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## 🛠 Tech Stack
 
-| Layer       | Technology                                     |
-| ----------- | ---------------------------------------------- |
-| Framework   | **Next.js 16** (App Router, API Routes)        |
-| Language    | **TypeScript**                                  |
-| Database    | **MongoDB Atlas** via **Mongoose 9**            |
-| Auth        | **JWT** (httpOnly cookies) + **bcryptjs**       |
-| Validation  | **Zod** schema validation                       |
-| AI          | **Google Gemini** (`@google/genai`)             |
-| PDF         | **jsPDF** for climate report generation         |
-| Maps        | **Leaflet** + **react-leaflet**                 |
-| Animations  | **GSAP** + `@gsap/react`                        |
-| Blockchain  | **ethers.js** + **bip39** (wallet primitives)   |
-| Styling     | **Tailwind CSS 4**                              |
-| Icons       | **lucide-react**                                |
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Framework** | Next.js 16 (App Router) | Full-stack React framework with API routes |
+| **Language** | TypeScript 5 | Type-safe development |
+| **Frontend** | React 19 | Component-based UI |
+| **Styling** | Tailwind CSS 4 | Utility-first responsive design |
+| **Animations** | GSAP 3.14 + @gsap/react | Cinematic scroll-triggered animations |
+| **Icons** | Lucide React | Consistent icon library |
+| **Maps** | Leaflet.js + React-Leaflet 5 | Interactive geo-located listings |
+| **Database** | MongoDB + Mongoose 9 | NoSQL document store with ODM |
+| **Auth** | JWT (jsonwebtoken) + bcryptjs | Secure token-based authentication |
+| **AI** | Google Gemini AI (@google/genai) | Carbon credit estimation & smart suggestions |
+| **PDF** | jsPDF | Climate history report generation |
+| **Crypto** | Ethers.js 6 + bip39 | Blockchain-style hash generation |
+| **Validation** | Zod 4 | Runtime schema validation |
+| **Fonts** | Geist + Geist Mono | Modern typography |
 
 ---
 
-## 🔐 Environment Variables
+## 📁 Project Structure
 
-| Variable       | Description                        |
-| -------------- | ---------------------------------- |
-| `MONGODB_URI`  | MongoDB Atlas connection string    |
-| `JWT_SECRET`   | Secret key for JWT signing         |
-| `JWT_EXPIRES_IN` | Token expiry (default: `7d`)     |
-| `GEMINI_API_KEY` | Google Gemini API key for AI     |
-| `NODE_ENV`     | `development` or `production`      |
+```
+newproject/
+├── app/
+│   ├── page.tsx                        # Landing page (Hero + About + Stats + Solutions + Footer)
+│   ├── layout.tsx                      # Root layout with Geist fonts & metadata
+│   ├── globals.css                     # Global styles
+│   ├── favicon.ico
+│   │
+│   ├── login/page.tsx                  # Login page (Individual + Company toggle)
+│   ├── signup/page.tsx                 # Registration page (Individual + Company toggle)
+│   │
+│   ├── components/
+│   │   ├── LeafletMap.tsx              # Reusable interactive map component
+│   │   └── homecomponents/
+│   │       ├── Navbar.tsx              # Responsive navbar with scroll effect
+│   │       ├── herosection.tsx         # Hero with video background & GSAP
+│   │       ├── aboutsection.tsx        # How-it-works section
+│   │       ├── statesection.tsx        # Animated impact statistics
+│   │       ├── solutionsection.tsx     # Platform features showcase
+│   │       └── Footer.tsx              # Site footer
+│   │
+│   ├── user/                           # 👤 Individual Farmer Dashboard
+│   │   ├── dashboard/page.tsx          #    Main dashboard (profile, credits, audit logs, suggestions, referrals)
+│   │   ├── onboarding/page.tsx         #    Farmer onboarding (land, practices, KYC)
+│   │   ├── getcarboncredit/page.tsx    #    Request AI carbon credit estimation
+│   │   ├── marketplace/page.tsx        #    Browse & sell credits on marketplace
+│   │   └── updateprofile/page.tsx      #    Edit profile information
+│   │
+│   ├── community/                      # 👥 Community Admin Dashboard
+│   │   ├── dashboard/page.tsx          #    Community overview (members, credits, sales, audit)
+│   │   ├── onboarding/page.tsx         #    Register new community
+│   │   ├── getcarboncredit/page.tsx    #    AI-powered community credit distribution
+│   │   └── communitymarketplace/page.tsx  # Community credit marketplace
+│   │
+│   ├── aggregator/                     # 🔗 Aggregator Dashboard
+│   │   ├── dashboard/page.tsx          #    Analytics, deals, projects overview
+│   │   ├── onboarding/page.tsx         #    Aggregator registration
+│   │   ├── marketplace/page.tsx        #    Browse community listings
+│   │   └── project/page.tsx            #    Create & manage project bundles
+│   │
+│   ├── company/                        # 🏢 Corporate Buyer Dashboard
+│   │   ├── dashboard/page.tsx          #    ESG progress, audit trail, purchases
+│   │   └── marketplace/page.tsx        #    Browse & buy aggregated projects
+│   │
+│   ├── solar/                          # ☀️ Sun Token Module
+│   │   ├── seller/
+│   │   │   ├── dashboard/page.tsx      #    Energy stats, token balance, sales history
+│   │   │   ├── onboarding/page.tsx     #    Solar installation registration
+│   │   │   ├── get-token/page.tsx      #    Log energy & generate tokens
+│   │   │   └── sell-token/page.tsx     #    List tokens on marketplace
+│   │   └── buyer/
+│   │       ├── dashboard/page.tsx      #    Purchase history, audit trail
+│   │       ├── onboarding/page.tsx     #    Buyer registration
+│   │       └── marketplace/page.tsx    #    Browse & buy Sun Tokens (with map)
+│   │
+│   ├── api/                            # 🔌 Backend API Routes (47 endpoints)
+│   │   ├── auth/                       #    Authentication (login, register, logout, me)
+│   │   ├── users/                      #    User CRUD (profile, marketplace, payouts, onboarding)
+│   │   ├── ai/                         #    AI endpoints (suggestions, credit calc, climate history)
+│   │   ├── community/                  #    Community management (9 endpoints)
+│   │   ├── communityadmin/             #    Admin management (4 endpoints)
+│   │   ├── aggregator/                 #    Aggregator operations (7 endpoints)
+│   │   ├── company/                    #    Company operations (3 endpoints)
+│   │   ├── solar/                      #    Sun Token operations (5 endpoints)
+│   │   ├── transactions/               #    Transaction queries (2 endpoints)
+│   │   ├── auditlogs/                  #    Audit log queries (1 endpoint)
+│   │   └── refferal/                   #    Referral code generation (1 endpoint)
+│   │
+│   ├── models/                         # 📊 Mongoose Data Models (21 models)
+│   │   ├── user.ts                     #    Base user model
+│   │   ├── userprofile.ts              #    Extended farmer profile
+│   │   ├── company.ts                  #    Corporate entity model
+│   │   ├── community.ts                #    Farming community model
+│   │   ├── communityadmin.ts           #    Community-admin link
+│   │   ├── communitycarboncredits.ts   #    Pooled community credits
+│   │   ├── communityaggregatordeal.ts  #    Proposals between aggregators & communities
+│   │   ├── aggregatorprofile.ts        #    Aggregator registration
+│   │   ├── aggregatorproject.ts        #    Bundled credit projects
+│   │   ├── aggregatordeals.ts          #    Purchase deals log
+│   │   ├── companydeals.ts             #    Company purchase records
+│   │   ├── credit.ts                   #    Individual credit balance
+│   │   ├── carbonmarket.ts             #    Marketplace listings
+│   │   ├── transaction.ts              #    Financial transaction records
+│   │   ├── memberpayout.ts             #    Farmer payout records
+│   │   ├── solarprofile.ts             #    Solar installation profile
+│   │   ├── suntoken.ts                 #    Token balance & energy tracking
+│   │   ├── suntokenmarketlisting.ts    #    Token marketplace listings
+│   │   ├── suntokentransaction.ts      #    Token purchase transactions
+│   │   ├── auditlogs.ts                #    Immutable audit chain
+│   │   └── refferaldata.ts             #    Referral code tracking
+│   │
+│   └── lib/                            # 🔧 Shared Utilities
+│       ├── db.ts                       #    Cached MongoDB connection
+│       ├── jwt.ts                      #    Token sign & verify helpers
+│       └── constants.ts                #    Platform constants (prices, rates, reasons)
+│
+├── public/                             # Static assets
+│   ├── farm.mp4                        #    Hero background video
+│   ├── farm.jpg                        #    Fallback image
+│   ├── greensignin.jpg                 #    Login page background
+│   └── greensignup.jpg                 #    Signup page background
+│
+├── scripts/                            # Database utilities
+│   ├── migrate_credits.js              #    Credit migration script
+│   └── inspect_credits.js              #    Credit inspection tool
+│
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+├── postcss.config.mjs
+└── eslint.config.mjs
+```
 
 ---
 
-## 👥 Roles & Workflows
+## 📊 Database Schema (21 Models)
 
-### 1. Farmer / User
+### Core Identity Models
 
-```
-Register (organisation role) → Login → Select Role → Onboarding Form → Dashboard
-```
+| Model | Key Fields | Purpose |
+|---|---|---|
+| `User` | `userId`, `username`, `email`, `phone`, `password`, `role` | Base authentication (roles: `individual`, `communityadmin`) |
+| `Company` | `companyName`, `companyEmail`, `companyId`, `companyPhone`, `password` | Corporate buyer entity |
+| `UserProfile` | `userId`, `communityId`, `practices[]`, `soil_type`, `landarea`, `landlocation`, `current_crop[]`, `previous_crop[]`, `aadhar_card_no`, `pan_card_no`, `bank_account_no` | Extended farmer profile with full KYC and land data |
+| `SolarProfile` | `userId`, `userType`, `address`, `coordinates`, `digitalMeterNumber`, `electricityBill`, `bankAccountNo`, `aadharCardNo`, `panCardNo` | Solar installation registration with KYC |
 
-- **Registration**: Creates a `User` document with hashed password. JWT token set as httpOnly cookie.
-- **Onboarding** (`POST /api/users/onboarding`): Multipart form submission with:
-  - KYC documents (Aadhaar, PAN, bank account, IFSC)
-  - Land details (area, GPS coordinates, soil type)
-  - Farming info (current/previous crops, urea usage, sustainable practices)
-  - File uploads: climate land data & soil test report (stored as binary in MongoDB)
-  - Entry status: **individual** or **community** (if community, auto-joins the selected community's member list)
-- **Dashboard**: Displays credit count, fiat balance, AI-powered suggestions, climate history report, land map, and payout history.
-- **Payouts**: When a company buys an aggregator project, earnings are **proportionally distributed** to each community member based on their individual credit contribution.
+### Community & Aggregation Models
 
-### 2. Community Admin
+| Model | Key Fields | Purpose |
+|---|---|---|
+| `Community` | `community_name`, `community_id`, `community_district`, `community_state`, `community_admin`, `community_practices[]`, `community_members_id[]` | Farming community group |
+| `CommunityAdmin` | `userId` (→ User), `community_id` | Admin-community link |
+| `CommunityCarbonCredits` | `community_id`, `community_carbon_credits`, `total_credits_generated`, `credits_sold` | Pooled community credit balance |
+| `CommunityAggregatorDeal` | `community_id`, `aggregator_id`, `credits_offered`, `price_per_credit`, `status` | Aggregator proposals to communities |
+| `AggregatorProfile` | `userId` (→ User), `DealerId` | Aggregator identity |
+| `AggregatorProject` | `aggregatorId`, `projectName`, `projectDescription`, `sourceCommunityIds[]`, `totalCredits`, `pricePerCredit`, `status`, `buyerCompanyId` | Bundled credit projects for corporate market |
+| `AggregatorDeals` | `aggregatorId`, `communityDealInfo`, `individualDealInfo` | Deal records (community or individual) |
 
-```
-Register → Login → Community Onboarding → Dashboard
-```
+### Marketplace & Financial Models
 
-- **Community Onboarding** (`POST /api/communityadmin/onboarding`): Creates both a `Community` document and a `CommunityAdmin` link (normalized — admin is a User with an admin role assignment).
-- **Dashboard**: View community members, their profiles, total land area, aggregated carbon credits, and deal proposals.
-- **Credit Generation** (`POST /api/ai/divide_community_crdits`): Triggers **AI-powered** (Gemini) credit calculation based on total community land area and farming practices. Credits are distributed proportionally to each member's `Credit` wallet. A fallback formula (1.5 credits/acre) is used if AI is unavailable.
-- **List on Market** (`POST /api/community/list_on_market`): Lists the community's carbon credits on the global `CarbonMarket` with a SHA-256 audit log entry.
-- **Deal Management** (`GET/POST /api/community/get_community_aggregator_proposal`):
-  - **View** incoming proposals from aggregators.
-  - **Accept**: Creates an `AggregatorDeals` entry, deducts credits from the community pool, updates the Carbon Market listing.
-  - **Reject**: Updates deal status without any credit movement.
-- **Sale Transactions** (`GET /api/community/sale_transactions`): Aggregates `MemberPayout` records by project, showing total payout per sale, member details, and buyer information.
+| Model | Key Fields | Purpose |
+|---|---|---|
+| `Credit` | `userId`, `credit`, `balance` | Individual credit & balance tracker |
+| `CarbonMarket` | `communityCarbonMarket`, `individualCarbonMarket` | Carbon credit marketplace listings |
+| `CompanyDeals` | `companyId`, `projectId`, `creditAmount`, `pricePerCredit`, `totalValue`, `transactionHash` | Company purchase records |
+| `Transaction` | `type`, `fromId`, `toId`, `creditAmount`, `pricePerCredit`, `totalValue`, `status` | General financial transaction log |
+| `MemberPayout` | `userId`, `communityId`, `projectId`, `creditAmount`, `pricePerCredit`, `totalPayout`, `transactionId` | Farmer payout per project sale |
 
-### 3. Aggregator
+### Sun Token Models
 
-```
-Register → Login → Aggregator Onboarding → Browse Marketplace → Propose Deals → Create Projects
-```
+| Model | Key Fields | Purpose |
+|---|---|---|
+| `SunToken` | `userId`, `totalEnergyProduced`, `totalEnergyConsumed`, `leftoverEnergy`, `tokensGenerated`, `tokensAvailable`, `tokensSold`, `balance` | Energy & token balance tracker |
+| `SunTokenMarketListing` | `sellerId`, `sellerName`, `tokens`, `pricePerToken`, `totalValue`, `location`, `status` | Geo-located token listings |
+| `SunTokenTransaction` | `buyerId`, `sellerId`, `listingId`, `tokenAmount`, `totalAmount`, `status`, `txHash` | Multi-step purchase pipeline |
 
-- **Aggregator Onboarding** (`POST /api/aggregator/onboarding`): Creates an `AggregatorProfile` linking the authenticated user to a unique `DealerId`.
-- **Browse Marketplace** (`GET /api/aggregator/get_marketplace_data`): Fetches all communities that have listed their credits on the Carbon Market.
-- **Propose Deal** (`POST /api/aggregator/aggregatordeal`): Creates a `CommunityAggregatorDeal` with `pending` status. The community admin can then accept or reject this proposal.
-- **Projects** (`GET/POST /api/aggregator/projects`):
-  - **View**: Lists all projects with available credit inventory (purchased credits minus already-bundled credits).
-  - **Create**: Bundles purchased credits into a named project with a price-per-credit for the company marketplace. Inventory is validated. A SHA-256 audit log is created.
-- **Analytics** (`GET /api/aggregator/analytics`): Returns total deals, total credits, total value, active communities, and recent deals.
-- **Sold Projects** (`GET /api/aggregator/sold_projects`): Returns sold projects enriched with company name, payout breakdowns, and aggregator profit calculations.
+### System Models
 
-### 4. Company (Buyer)
-
-```
-Register (company role) → Login → Dashboard → Browse Projects → Buy Project
-```
-
-- **Registration**: Creates a `Company` document (name, email, companyId, phone, password).
-- **Browse Marketplace** (`GET /api/company/marketplace`): Lists all `open` aggregator projects sorted by newest.
-- **Buy Project** (`POST /api/company/buy_project`): **The most complex operation** — triggers a full payment cascade:
-  1. Validates company session and finds the open project.
-  2. Identifies source communities via `AggregatorDeals`.
-  3. For each source community, loads all members and their `Credit` records.
-  4. **Proportionally distributes** earnings to each farmer based on their credit contribution ratio.
-  5. Updates each member's `Credit` record (decrements `credit`, increments `balance`).
-  6. Creates `MemberPayout` records for each farmer.
-  7. Creates per-member `Transaction` (transfer) and `AuditLog` entries.
-  8. Calculates aggregator profit = totalPaid − communityTotalPayout.
-  9. Marks project as `sold`, creates `CompanyDeals` record.
-  10. Writes final SHA-256 chained audit logs for the purchase and sale completion.
-- **Dashboard Stats** (`GET /api/company/totalaggregator`): Returns total registered aggregators, available projects, and credits bought by this company.
+| Model | Key Fields | Purpose |
+|---|---|---|
+| `AuditLog` | `action`, `entityType`, `entityId`, `userId`, `metadata`, `txHash`, `previousHash`, `timestamp` | Immutable SHA-256 hash chain (16 action types) |
+| `ReferralData` | `ownerId`, `code`, `referredCount` | Unique referral code tracker |
 
 ---
 
-## 📊 Data Models
+## 🔌 API Routes (47 Endpoints)
 
-| Model                     | Purpose                                                  | Key Fields                                                           |
-| ------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------- |
-| `User`                    | User account (farmers, admins, aggregators)               | `userId`, `username`, `email`, `phone`, `password`                   |
-| `UserProfile`             | Detailed farmer profile                                   | `userId` (ref), KYC docs, land info, crops, soil, practices          |
-| `Credit`                  | Farmer credit wallet                                      | `userId`, `credit` (volume), `balance` (fiat earnings)               |
-| `Community`               | Community group                                           | `community_id`, `community_name`, `community_members_id[]`, admin    |
-| `CommunityAdmin`          | Normalized User ↔ Community link                          | `userId` (ref), `community_id`                                       |
-| `CommunityCarbonCredits`  | Community aggregate credit pool                           | `community_id`, `community_carbon_credits`, `credits_sold`           |
-| `CarbonMarket`            | Global marketplace listings                               | `communityCarbonMarket` / `individualCarbonMarket` subdocuments      |
-| `CommunityAggregatorDeal` | Deal proposals from aggregator → community                | `community_id`, `aggregator_id`, `credits_offered`, `status`         |
-| `Company`                 | Company buyer account                                     | `companyId`, `companyName`, `companyEmail`, `password`                |
-| `CompanyDeals`            | Purchase records                                          | `companyId`, `projectId`, `creditAmount`, `totalValue`, `txHash`     |
-| `AggregatorProfile`       | Aggregator registration                                   | `userId` (ref), `DealerId`                                           |
-| `AggregatorDeals`         | Accepted deals ledger                                     | `aggregatorId`, `communityDealInfo` / `individualDealInfo`           |
-| `AggregatorProject`       | Bundled project for company marketplace                   | `aggregatorId`, `projectName`, `totalCredits`, `pricePerCredit`      |
-| `Transaction`             | Financial transaction record                              | `type` (sale/purchase/transfer), `fromId`, `toId`, `totalValue`      |
-| `AuditLog`                | SHA-256 chained audit trail                               | `action`, `txHash`, `previousHash`, `metadata`                       |
-| `MemberPayout`            | Per-member earnings from project sales                    | `userId`, `communityId`, `projectId`, `creditAmount`, `totalPayout`  |
+### 🔐 Authentication (`/api/auth/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/auth/register` | Register new user (Individual / Company) |
+| `POST` | `/api/auth/login` | Login with email/password, returns JWT cookie |
+| `POST` | `/api/auth/logout` | Clear authentication cookie |
+| `GET` | `/api/auth/me` | Get current authenticated user |
+
+### 👤 User Management (`/api/users/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/users/onboarding` | Complete farmer profile (land, practices, KYC) |
+| `GET` | `/api/users/getprofile` | Fetch user's extended profile |
+| `PUT` | `/api/users/updateprofile` | Update profile information |
+| `POST` | `/api/users/list_on_market` | List credits on the individual marketplace |
+| `GET` | `/api/users/marketplace` | Browse individual marketplace listings |
+| `GET` | `/api/users/my_payouts` | Fetch user's payout history |
+
+### 🤖 AI Endpoints (`/api/ai/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/ai/individual_credits` | AI calculates & mints credits for single farmer |
+| `POST` | `/api/ai/divide_community_crdits` | AI distributes credits across community members |
+| `POST` | `/api/ai/suggestion` | Generate personalized farming/market suggestions |
+| `POST` | `/api/ai/getclimatehistory` | Generate 5-year climate history PDF |
+
+### 👥 Community (`/api/community/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/community/getcommunity` | List all communities |
+| `GET` | `/api/community/getspecific_community` | Get single community details |
+| `GET` | `/api/community/getspecific_community_memebers` | List community members |
+| `GET` | `/api/community/get_specific_community_members_userprofile` | Get member profiles with user data |
+| `GET` | `/api/community/getcommunitycredit` | Get community credit balance |
+| `POST` | `/api/community/setcommunitymember` | Add member to community |
+| `POST` | `/api/community/list_on_market` | List community credits on marketplace |
+| `GET` | `/api/community/sale_transactions` | Fetch community sale records |
+| `GET` | `/api/community/get_community_aggregator_proposal` | View incoming aggregator proposals |
+
+### 🏛 Community Admin (`/api/communityadmin/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/communityadmin/onboarding` | Register new community |
+| `GET` | `/api/communityadmin/getcommunityadmin` | Get admin profile |
+| `PUT` | `/api/communityadmin/updatecommunitydata` | Update community information |
+| `GET` | `/api/communityadmin/verifycommunityadmin` | Verify admin status |
+
+### 🔗 Aggregator (`/api/aggregator/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/aggregator/onboarding` | Register as aggregator |
+| `GET` | `/api/aggregator/verifyaggregator` | Verify aggregator status |
+| `GET` | `/api/aggregator/get_marketplace_data` | Browse available community listings |
+| `POST` | `/api/aggregator/aggregatordeal` | Create deal with community/individual |
+| `POST` | `/api/aggregator/projects` | Create project bundle from deals |
+| `GET` | `/api/aggregator/sold_projects` | View sold project history |
+| `GET` | `/api/aggregator/analytics` | Get aggregator dashboard analytics |
+
+### 🏢 Company (`/api/company/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/company/marketplace` | Browse aggregated projects |
+| `POST` | `/api/company/buy_project` | Purchase a project (triggers payout cascade) |
+| `GET` | `/api/company/totalaggregator` | List all aggregators  |
+
+### ☀️ Solar / Sun Token (`/api/solar/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/solar/onboarding` | Register solar installation |
+| `GET` | `/api/solar/profile` | Get solar profile |
+| `POST` | `/api/solar/get-tokens` | Log energy production & generate tokens |
+| `POST` | `/api/solar/list-tokens` | List tokens on marketplace |
+| `GET` | `/api/solar/buyer/marketplace` | Browse available token listings (with geo data) |
+| `POST` | `/api/solar/buyer/buy-token` | Purchase tokens (triggers multi-step pipeline) |
+
+### 📋 Transactions & Audit (`/api/transactions/`, `/api/auditlogs/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/transactions/all_transactions` | All platform transactions |
+| `GET` | `/api/transactions/specific_transactions` | User-specific transactions |
+| `GET` | `/api/auditlogs` | Query audit logs (filterable by userId) |
+
+### 🎟 Referral (`/api/refferal/`)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/refferal` | Generate unique referral code |
 
 ---
 
-## 📡 API Reference
+## 🔄 User Roles & Flows
+
+### Flow 1: Individual Farmer (Carbon Credits)
+
+```
+Register → Login → Onboarding (Land + KYC) → AI Credit Estimation
+    ↓
+Dashboard (View Credits, Audit Logs, AI Suggestions, Payouts)
+    ↓
+Option A: List credits on Individual Marketplace → Consumer buys P2P
+Option B: Join a Community → Credits pooled → Aggregator bundles → Company buys
+    ↓
+Payout received → Balance updated → Audit log created
+```
+
+### Flow 2: Community Admin (Carbon Credits)
+
+```
+Register (role: communityadmin) → Login → Community Onboarding
+    ↓
+Dashboard (Members, Credits, Sales, Audit Logs)
+    ↓
+Add Members → Request AI Credit Distribution (per member land area)
+    ↓
+List credits on Community Marketplace → Review Aggregator Proposals
+    ↓
+Accept Deal → Aggregator bundles into Project → Company purchases
+    ↓
+Member Payouts auto-distributed → Audit chain updated
+```
+
+### Flow 3: Aggregator (Credit Bundling)
+
+```
+Register → Login → Aggregator Onboarding
+    ↓
+Dashboard (Analytics, Deals, Projects, Audit)
+    ↓
+Browse Community/Individual Marketplace → Send Deal Proposals
+    ↓
+Bundle accepted deals into Project → Set price per credit
+    ↓
+List Project on Corporate Marketplace → Company purchases
+    ↓
+Revenue distributed to community members (MemberPayout)
+```
+
+### Flow 4: Corporate Buyer (Carbon Credits)
+
+```
+Register (as Company) → Login
+    ↓
+Dashboard (ESG Progress, Purchase History, Audit Trail)
+    ↓
+Browse Aggregated Projects → Purchase Project
+    ↓
+Credits offset against footprint → Transaction recorded
+    ↓
+SHA-256 audit hash created → Payout cascade triggered
+```
+
+### Flow 5: Solar Seller (Sun Tokens)
+
+```
+Register → Login → Solar Onboarding (Address, Meter, KYC, Coordinates)
+    ↓
+Dashboard (Energy Stats, Token Balance, Sales, Audit)
+    ↓
+Log Energy Production → Tokens Minted (1 kWh = 1 Token)
+    ↓
+List Tokens on Geo-Marketplace (with price & location)
+    ↓
+Buyer purchases → Government Review Pipeline → Seller Payout
+```
+
+### Flow 6: Solar Buyer (Sun Tokens)
+
+```
+Register → Login → Solar Onboarding
+    ↓
+Dashboard (Purchase History, Spending, Audit)
+    ↓
+Browse Geo-Map Marketplace → Buy Tokens from nearby sellers
+    ↓
+Transaction created → Multi-step processing pipeline
+```
+
+---
+
+## 🤖 AI Integration (Gemini)
+
+EcoTrade uses **Google Gemini AI** (`gemini-1.5-pro`) for four core features, each with a deterministic fallback:
+
+| Feature | Endpoint | How It Works | Fallback |
+|---|---|---|---|
+| **Individual Credit Estimation** | `/api/ai/individual_credits` | Gemini analyzes land area, soil type, farming practices, and crops to estimate CO₂ sequestration in tonnes | `1.5 credits/acre` + organic/regenerative bonus |
+| **Community Credit Distribution** | `/api/ai/divide_community_crdits` | Gemini calculates total community credits, then distributes proportionally by member's land area | `1.5 credits/acre` flat rate |
+| **Smart Suggestions** | `/api/ai/suggestion` | Gemini generates personalized farming recommendations based on user's profile, practices, and local conditions | 70+ curated suggestion bank across soil health, water management, biodiversity, market timing, and more |
+| **Climate History Reports** | `/api/ai/getclimatehistory` | Gemini generates 5-year monthly climate data (temperature, rainfall, humidity, carbon sequestration) for any lat/lng, compiled into a downloadable PDF | Mock data generated with latitude-based climate modeling |
+
+---
+
+## 🔒 Security & Audit
 
 ### Authentication
+- **JWT Tokens** stored as HTTP-only cookies (7-day expiry)
+- **bcryptjs** password hashing with salt rounds
+- Role-based access control across all API routes
+- Token verification middleware on every protected endpoint
 
-| Method | Endpoint              | Description                                       | Auth |
-| ------ | --------------------- | ------------------------------------------------- | ---- |
-| POST   | `/api/auth/register`  | Register user (`organisation`) or `company`       | ✗    |
-| POST   | `/api/auth/login`     | Login with email/userId + password                | ✗    |
-| GET    | `/api/auth/me`        | Get current authenticated user from JWT cookie    | ✓    |
-| POST   | `/api/auth/logout`    | Clear auth cookie                                 | ✗    |
-
-**Auth Logic**: Passwords are hashed with `bcryptjs` (12 salt rounds). JWTs encode `{id, role, email}` and are stored as httpOnly, secure, sameSite-strict cookies with 7-day expiry. Login accepts both `email` and `userId`/`companyId` as identifier.
-
----
-
-### User / Farmer APIs
-
-| Method | Endpoint                  | Description                              | Auth |
-| ------ | ------------------------- | ---------------------------------------- | ---- |
-| POST   | `/api/users/onboarding`   | Create farmer profile (multipart form)   | ✓    |
-| GET    | `/api/users/getprofile`   | Get profile + credits + balance          | ✓    |
-| PATCH  | `/api/users/updateprofile`| Update profile fields/files              | ✓    |
-| GET    | `/api/users/my_payouts`   | Get all payout records                   | ✓    |
-
----
-
-### Community Admin APIs
-
-| Method | Endpoint                                  | Description                          | Auth |
-| ------ | ----------------------------------------- | ------------------------------------ | ---- |
-| POST   | `/api/communityadmin/onboarding`          | Create community + admin link        | ✓    |
-| GET    | `/api/communityadmin/getcommunityadmin`   | Get admin profile + community data   | ✓    |
-| PATCH  | `/api/communityadmin/updatecommunitydata` | Update community (admin only)        | ✓    |
-| GET    | `/api/communityadmin/verifycommunityadmin`| Check if user is community admin     | ✓    |
-
----
-
-### Community Data APIs
-
-| Method | Endpoint                                                    | Description                                    | Auth |
-| ------ | ----------------------------------------------------------- | ---------------------------------------------- | ---- |
-| GET    | `/api/community/getcommunity`                               | List all communities                           | ✗    |
-| GET    | `/api/community/getspecific_community?community_id=`        | Get single community details                   | ✗    |
-| GET    | `/api/community/getspecific_community_memebers?community_id=`| Get community member user records              | ✗    |
-| GET    | `/api/community/get_specific_community_members_userprofile` | Get members' profiles + total land area        | ✗    |
-| GET    | `/api/community/getcommunitycredit?community_id=`           | Get community credit count                     | ✗    |
-| POST   | `/api/community/setcommunitymember`                         | Add user to community                          | ✗    |
-| POST   | `/api/community/list_on_market`                             | List credits on Carbon Market + audit log      | ✗    |
-| GET    | `/api/community/get_community_aggregator_proposal`          | Fetch deal proposals for community             | ✗    |
-| POST   | `/api/community/get_community_aggregator_proposal`          | Accept/reject aggregator deal proposal         | ✗    |
-| GET    | `/api/community/sale_transactions`                          | Community sale history (admin only)            | ✓    |
-
----
-
-### Aggregator APIs
-
-| Method | Endpoint                                  | Description                              | Auth |
-| ------ | ----------------------------------------- | ---------------------------------------- | ---- |
-| POST   | `/api/aggregator/onboarding`              | Register as aggregator with DealerId     | ✓    |
-| GET    | `/api/aggregator/verifyaggregator`        | Check if user is aggregator              | ✓    |
-| GET    | `/api/aggregator/get_marketplace_data`    | Browse Carbon Market community listings  | ✗    |
-| POST   | `/api/aggregator/aggregatordeal`          | Propose deal to community                | ✗    |
-| GET    | `/api/aggregator/projects`                | List projects + available credit inventory| ✓   |
-| POST   | `/api/aggregator/projects`                | Create bundled project + audit log       | ✓    |
-| GET    | `/api/aggregator/analytics`               | Dashboard analytics (deals, credits, value)| ✓  |
-| GET    | `/api/aggregator/sold_projects`           | Sold projects with payout breakdowns     | ✓    |
-
----
-
-### Company APIs
-
-| Method | Endpoint                        | Description                                 | Auth |
-| ------ | ------------------------------- | ------------------------------------------- | ---- |
-| GET    | `/api/company/marketplace`      | Browse open aggregator projects             | ✗    |
-| POST   | `/api/company/buy_project`      | Purchase project (full payment cascade)     | ✓    |
-| GET    | `/api/company/totalaggregator`  | Dashboard stats (aggregators, projects, credits)| ✓ |
-
----
-
-### AI-Powered APIs
-
-| Method | Endpoint                              | Description                                  | Auth |
-| ------ | ------------------------------------- | -------------------------------------------- | ---- |
-| POST   | `/api/ai/suggestion`                  | AI farming/market suggestions (Gemini)       | ✗    |
-| POST   | `/api/ai/getclimatehistory`           | Climate intelligence PDF report (Gemini)     | ✗    |
-| POST   | `/api/ai/divide_community_crdits`     | AI-based credit calculation + distribution   | ✗    |
-
----
-
-### Transaction & Audit APIs
-
-| Method | Endpoint                                    | Description                              | Auth |
-| ------ | ------------------------------------------- | ---------------------------------------- | ---- |
-| GET    | `/api/transactions/all_transactions`        | All transactions for an entity           | ✓    |
-| GET    | `/api/transactions/specific_transactions`   | Single transaction by ID                 | ✓    |
-| GET    | `/api/auditlogs`                            | Fetch audit logs with chain integrity    | ✗    |
-
----
-
-## ⚙ Core Business Logic
-
-### Credit Distribution (AI)
-
-**Endpoint**: `POST /api/ai/divide_community_crdits`
-
-1. Receives `community_id`, `total_land_area`, and `profiles[]` (member data).
-2. **Gemini AI** calculates total carbon credits based on community size and farming practices.
-3. If AI fails, **fallback formula**: `1.5 credits/acre/year`.
-4. Credits are distributed **proportionally by land area** — each member's `Credit.credit` is incremented.
-5. Community aggregate `CommunityCarbonCredits` is updated with total generated credits.
-
-### Payment Cascade (Buy Project)
-
-**Endpoint**: `POST /api/company/buy_project`
-
-This is the most complex workflow — a single company purchase triggers a full financial cascade:
-
-```
-Company pays totalPaid = totalCredits × pricePerCredit
-       │
-       ▼
-For each source community in the project:
-       │
-       ├── Load all community members + their Credit records
-       ├── Calculate each member's share = memberCredits / totalCommunityCredits
-       ├── memberPayout = share × communityPayout
-       │
-       ├── Update Credit: credit -= memberCreditsIncluded, balance += memberPayout
-       ├── Create MemberPayout record
-       ├── Create per-member Transaction (transfer)
-       └── Create per-member AuditLog (SHA-256 chained)
-       │
-       ▼
-aggregatorProfit = totalPaid − sum(communityPayouts)
-       │
-       ▼
-Mark project "sold" → Create CompanyDeals → Final AuditLog entries
-```
-
-### Blockchain-Style Audit Trail
-
+### SHA-256 Blockchain-Style Audit Trail
 Every significant action creates an `AuditLog` entry with:
+- **`txHash`** — SHA-256 hash of the current action's metadata
+- **`previousHash`** — Hash of the last audit entry (creating an immutable chain)
+- **16 tracked action types:** `credit_generated`, `credit_purchased`, `credit_verified`, `profile_updated`, `score_calculated`, `credit_listed`, `project_created`, `deal_accepted`, `transaction_completed`, `credit_distributed`, `aggregator_sale_completed`, `credit_sold_direct`, `individual_credit_listed`, `individual_credit_purchased`, `sun_token_listed`, `sun_token_purchased`
 
-- **SHA-256 hash chaining**: Each `txHash` = SHA-256(`previousHash` + action payload JSON). This creates an immutable, tamper-evident chain.
-- **Actions tracked**: `credit_generated`, `credit_purchased`, `credit_verified`, `profile_updated`, `credit_listed`, `project_created`, `deal_accepted`, `transaction_completed`, `credit_distributed`, `aggregator_sale_completed`.
-- **Chain verification**: The `GET /api/auditlogs` endpoint performs lightweight chain integrity validation on returned entries.
-
-### AI Suggestions Engine
-
-**Endpoint**: `POST /api/ai/suggestion`
-
-- Sends farmer profile (crops, soil type, location, practices, urea usage) to **Gemini 2.0 Flash**.
-- Returns 6 personalized suggestions of types: `opportunity`, `alert`, `practice`, `market`, `warning`.
-- **Fallback**: If Gemini is unavailable, returns a weighted random selection from a 70+ entry curated suggestion bank covering soil health, water management, carbon optimization, crop management, climate resilience, market timing, biodiversity, and more.
-
-### Climate Intelligence Report
-
-**Endpoint**: `POST /api/ai/getclimatehistory`
-
-- Uses Gemini to generate 4-year historical climate data for a GPS location.
-- Falls back to deterministic mock data seeded from lat/lng.
-- Builds a professional **PDF report** (jsPDF) with:
-  - Temperature trends, rainfall, humidity, carbon sequestration estimates.
-  - Monthly breakdown tables for each year.
-  - Returns as base64-encoded PDF.
+### Data Validation
+- **Zod 4** for runtime request validation
+- Mongoose schema-level validation with custom error messages
+- Email regex validation, unique constraints, and enum enforcement
 
 ---
 
-## 🖥 Frontend Pages
+## 🖥 Pages & UI
 
-| Route                          | Component                        | Purpose                                      |
-| ------------------------------ | -------------------------------- | -------------------------------------------- |
-| `/`                            | Landing page                     | Hero, About, Stats, Solutions, Footer         |
-| `/login`                       | Login form                       | Email/ID + password, role selection           |
-| `/signup`                      | Registration form                | User or company registration                 |
-| `/selectrole`                  | Role selection                   | Choose: Farmer, Community Admin, Aggregator   |
-| `/user/dashboard`              | Farmer dashboard                 | Credits, balance, suggestions, climate report |
-| `/user/onboarding`             | Farmer onboarding                | Profile form with file uploads and map        |
-| `/user/updateprofile`          | Profile update                   | Edit existing profile data                    |
-| `/community/dashboard`         | Community dashboard              | Members, credits, deals, sale transactions    |
-| `/community/onboarding`        | Community creation               | Create community with practices               |
-| `/community/getcarboncredit`   | Credit generation                | Trigger AI credit distribution                |
-| `/community/communitymarketplace` | Community marketplace         | View/manage market listings                   |
-| `/aggregator/dashboard`        | Aggregator dashboard             | Analytics, deals, project management          |
-| `/aggregator/onboarding`       | Aggregator registration          | Register with Dealer ID                       |
-| `/aggregator/marketplace`      | Market browsing                  | Browse community listings, propose deals      |
-| `/aggregator/project`          | Project management               | Create/view bundled credit projects           |
-| `/company/dashboard`           | Company dashboard                | Stats, purchased credits overview             |
-| `/company/marketplace`         | Company marketplace              | Browse and buy aggregator projects            |
+| Page Route | Description |
+|---|---|
+| `/` | Landing page — Hero (video bg), About (how it works), Stats (animated counters), Solutions (features), Footer |
+| `/login` | Login page with Individual/Company toggle, animated UI with GSAP |
+| `/signup` | Registration with role selection, password visibility toggle |
+| `/user/dashboard` | Full farmer dashboard — profile card with map, credit stats, audit logs, AI suggestions, referral system, payout history |
+| `/user/onboarding` | Multi-field onboarding — land coordinates, soil type, crops, practices, KYC documents |
+| `/user/getcarboncredit` | Trigger AI credit estimation and view results |
+| `/user/marketplace` | Browse and list credits on individual marketplace |
+| `/user/updateprofile` | Edit profile fields |
+| `/community/dashboard` | Community overview — member list, credit balance, sales history, audit logs |
+| `/community/onboarding` | Create new community with district, state, and practices |
+| `/community/getcarboncredit` | AI-powered credit distribution across community members |
+| `/community/communitymarketplace` | Community credit marketplace |
+| `/aggregator/dashboard` | Analytics dashboard — deal count, total credits, value, active communities |
+| `/aggregator/onboarding` | Aggregator registration |
+| `/aggregator/marketplace` | Browse community/individual listings for deals |
+| `/aggregator/project` | Create and manage bundled projects |
+| `/company/dashboard` | Corporate dashboard — ESG offset progress, purchase history, audit trail |
+| `/company/marketplace` | Browse and purchase aggregated projects |
+| `/solar/seller/dashboard` | Energy production stats, token balance, sales history, audit |
+| `/solar/seller/onboarding` | Solar installation registration with digital meter and coordinates |
+| `/solar/seller/get-token` | Log energy production and mint Sun Tokens |
+| `/solar/seller/sell-token` | List tokens on marketplace with pricing |
+| `/solar/buyer/dashboard` | Purchase history, total spending, audit log |
+| `/solar/buyer/onboarding` | Buyer registration for energy purchases |
+| `/solar/buyer/marketplace` | Geo-located marketplace with Leaflet map to browse nearby token listings |
 
 ---
 
-## 📜 Scripts
+## 🔧 Environment Variables
 
-| Script                    | Purpose                                                           |
-| ------------------------- | ----------------------------------------------------------------- |
-| `scripts/migrate_credits.js`  | Migrates `Credit` records: moves `credit` → `balance` for records with balance = 0 but credit > 0 |
-| `scripts/inspect_credits.js`  | Debug utility to inspect credit records in the database           |
+Create a `.env.local` file in the project root:
+
+```env
+# Database
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<dbname>
+
+# Authentication
+JWT_SECRET=your_secure_jwt_secret_key
+JWT_EXPIRES_IN=7d
+
+# AI Integration
+GEMINI_API_KEY=your_google_gemini_api_key
+```
 
 ---
 
 ## 🚀 Getting Started
 
+### Prerequisites
+- **Node.js** ≥ 18.x
+- **npm** ≥ 9.x
+- **MongoDB Atlas** account (or local MongoDB instance)
+- **Google Gemini API Key** ([Get one here](https://aistudio.google.com/app/apikey))
+
+### Installation
+
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
-cd demowallet
+git clone https://github.com/tushar598/newproject.git
+cd newproject
 
 # 2. Install dependencies
 npm install
 
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your MongoDB URI, JWT secret, and Gemini API key
+# 3. Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your MongoDB URI, JWT secret, and Gemini API key
 
-# 4. Run development server
+# 4. Run the development server
 npm run dev
 
 # 5. Open in browser
-open http://localhost:3000
+# Navigate to http://localhost:3000
 ```
 
-### Available Scripts
+### Build for Production
 
 ```bash
-npm run dev    # Start development server with hot reload
-npm run build  # Build production bundle
-npm run start  # Start production server
-npm run lint   # Run ESLint
+npm run build
+npm start
 ```
+
+---
+
+## 📋 Use Cases
+
+### Use Case 1: Farmer Earning from Carbon Credits
+> **Ramu**, a smallholder farmer in Madhya Pradesh, registers on EcoTrade. He completes onboarding with his 5-acre land details, documents organic farming practices, and uploads his soil test report. The AI estimates his carbon sequestration at **7.5 tonnes CO₂/year**, minting 7.5 credits. He lists them at ₹350/credit on the marketplace. A corporation purchases them — **₹2,625 is directly deposited** into Ramu's bank account.
+
+### Use Case 2: Community Pooling for Corporate Deal
+> **Sita**, a community admin, registers her 15-member farming group in Rajasthan. Each member completes onboarding. She triggers AI-powered community credit distribution — the AI analyzes the total 80 acres and distributes **120 credits** proportionally. An aggregator proposes to bundle these credits into a "Rajasthan Sustainable Agriculture" project at ₹400/credit. A multinational corporation purchases the project — **₹48,000 is distributed** to 15 farmers based on their individual contributions.
+
+### Use Case 3: Solar Rooftop Owner Trading Energy
+> **Vikram** installed a 5kW solar panel on his rooftop in Pune. He registers on EcoTrade's Sun Token marketplace, entering his digital meter number and installation coordinates. His panels generate 25 kWh/day; he consumes 18 kWh. The remaining **7 kWh becomes 7 Sun Tokens**. He lists them at ₹7.50/token. A nearby consumer buys them through the geo-map — the transaction goes through government review and Vikram receives **₹52.50 directly**.
+
+### Use Case 4: Corporation Offsetting Carbon Footprint
+> **GreenCorp Ltd.**, with an annual carbon footprint of 5,000 tonnes CO₂e, registers on EcoTrade. They browse aggregated projects and purchase 500 credits from the "Maharashtra Community Farming" project. Their dashboard shows they've offset **10% of their footprint**. Every purchase is SHA-256 hashed, creating a verifiable ESG compliance trail for regulatory reporting.
+
+### Use Case 5: Consumer Buying Green Energy
+> **Priya**, an environmentally conscious consumer in Delhi, wants to support local solar energy. She browses the Sun Token marketplace map, finds nearby sellers, and purchases 50 tokens (50 kWh equivalent). The multi-step government pipeline processes the energy transfer, and Priya receives confirmation that her purchase supports **50 kWh of renewable energy generation**.
+
+---
+
+## 🖼 Screenshots
+
+> *The landing page features a full-screen video background with GSAP-animated headlines, feature cards, and scroll-triggered statistics. Dashboards feature real-time data cards, interactive maps, and comprehensive audit trail tables.*
+
+---
+
+## 🔮 Future Scope
+
+- 📱 **Mobile App** — React Native version for on-the-go farmer access
+- 🌐 **Blockchain Integration** — Move from SHA-256 hash chains to Ethereum/Polygon smart contracts
+- 📡 **IoT Integration** — Direct smart meter API feeds for automated energy logging
+- 🛰️ **Satellite Verification** — NDVI/satellite imagery for automated land practice verification
+- 🏛️ **Government API** — Direct DISCOM integration for energy transfer approvals
+- 📊 **ESG Reporting** — Automated ESG compliance report generation for corporates
+- 🌍 **Multi-Language** — Hindi, Tamil, Telugu, and other regional language support
+- 💳 **Payment Gateway** — Razorpay/UPI integration for real money transactions
+- 🤝 **Biogas & Wind** — Extend Sun Token model to biogas plants and wind farms
 
 ---
 
 ## 📄 License
 
-This project is private and not licensed for public distribution.
+This project was built during the **.Execute Hackathon** (36-hour sprint) and is for educational/demonstration purposes.
+
+---
+
+<p align="center">
+  <b>Built with 💚 by Team Hustlers at .Execute Hackathon</b><br/>
+  <i>Tushar Singh Chouhan • Sheetal Pandey • Karan Verma</i>
+</p>
