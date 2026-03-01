@@ -16,7 +16,7 @@ function sha256Hash(data: string): string {
 
 /**
  * POST /api/solar/list-tokens
- * List ALL available Sun Tokens on the marketplace (no partial selling).
+ * List Sun Tokens on the marketplace. Supports partial selling via optional `tokensToSell` body param.
  */
 export async function POST(req: NextRequest) {
     try {
@@ -39,17 +39,40 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Complete solar onboarding first' }, { status: 400 });
         }
 
+        // Prevent duplicate active listings
+        const existingListing = await SunTokenMarketListing.findOne({ sellerId: decoded.id, status: 'available' });
+        if (existingListing) {
+            return NextResponse.json({ error: 'You already have an active listing. Wait for it to sell before creating another.' }, { status: 409 });
+        }
+
+        // Parse optional body for partial selling
+        let tokensToSell = sunToken.tokensAvailable;
+        try {
+            const body = await req.json();
+            if (body.tokensToSell !== undefined) {
+                const requested = Number(body.tokensToSell);
+                if (isNaN(requested) || requested <= 0) {
+                    return NextResponse.json({ error: 'tokensToSell must be a positive number' }, { status: 400 });
+                }
+                if (requested > sunToken.tokensAvailable) {
+                    return NextResponse.json({ error: `Cannot sell ${requested} tokens. Only ${sunToken.tokensAvailable} available.` }, { status: 400 });
+                }
+                tokensToSell = Math.floor(requested);
+            }
+        } catch {
+            // No body or invalid JSON — sell all available tokens
+        }
+
         const userDoc = await User.findById(decoded.id).lean() as any;
         const sellerName = userDoc?.username || 'Seller';
 
-        const tokensToSell = sunToken.tokensAvailable;
         const pricePerToken = MARKET_PRICE_PER_TOKEN;
         const totalValue = tokensToSell * pricePerToken;
 
         // Deduct tokens
         await SunToken.findOneAndUpdate(
             { userId: decoded.id },
-            { $set: { tokensAvailable: 0 }, $inc: { tokensSold: tokensToSell } }
+            { $inc: { tokensAvailable: -tokensToSell, tokensSold: tokensToSell } }
         );
 
         // Create marketplace listing
@@ -101,3 +124,4 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Internal Server Error', details: error.message }, { status: 500 });
     }
 }
+

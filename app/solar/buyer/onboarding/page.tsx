@@ -57,7 +57,6 @@ export default function SolarBuyerOnboarding() {
             // @ts-ignore
             await import('leaflet/dist/leaflet.css');
             if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
-
             const map = L.map(mapContainerRef.current!, { scrollWheelZoom: true }).setView([lat, lng], 5);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
             const marker = L.marker([lat, lng], { draggable: true }).addTo(map);
@@ -115,10 +114,13 @@ export default function SolarBuyerOnboarding() {
 
     if (success) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+            <div className="min-h-screen bg-white flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 bg-orange-50 border border-orange-200 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
-                        <CheckCircle className="w-8 h-8 text-orange-500" />
+                    <div className="relative inline-block mb-4">
+                        <div className="w-16 h-16 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center justify-center shadow-md shadow-emerald-100/40">
+                            <CheckCircle className="w-8 h-8 text-emerald-600" />
+                        </div>
+                        <div className="absolute -inset-3 rounded-3xl bg-emerald-200/20 blur-xl animate-pulse" />
                     </div>
                     <h2 className="text-xl font-bold text-slate-900 mb-1">Buyer Profile Created!</h2>
                     <p className="text-sm text-slate-500">Redirecting to dashboard…</p>
@@ -127,28 +129,29 @@ export default function SolarBuyerOnboarding() {
         );
     }
 
-    const inputCls = "w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all bg-slate-50 focus:bg-white text-sm text-slate-900";
-    const labelCls = "block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5";
+    const inputCls = "w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-100 outline-none transition-all bg-slate-50/50 focus:bg-white text-sm text-slate-900 placeholder-slate-400";
+    const labelCls = "block text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] mb-1.5";
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div className="min-h-screen bg-white text-slate-900">
+
+            <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-2xl border-b border-amber-100/60 shadow-[0_1px_3px_rgba(251,191,36,0.06)]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-orange-600 rounded-xl flex items-center justify-center shadow-md shadow-orange-500/25">
+                        <div className="w-9 h-9 bg-gradient-to-br from-amber-300 to-orange-400 rounded-xl flex items-center justify-center shadow-md shadow-amber-200/20">
                             <Sun className="w-4 h-4 text-white" />
                         </div>
                         <span className="font-bold text-slate-900 text-lg">Grento</span>
                     </div>
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Buyer Onboarding</span>
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">Buyer Onboarding</span>
                 </div>
             </header>
 
-            <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-20">
+            <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-20 relative z-10">
                 <div className="flex items-center justify-between mb-8">
                     {STEPS.map((s, i) => (
                         <div key={i} className="flex items-center flex-1">
-                            <div className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all text-xs font-bold ${i === step ? 'bg-orange-50 text-orange-700 border border-orange-200' : i < step ? 'text-emerald-600' : 'text-slate-400'}`}>
+                            <div className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all text-xs font-bold ${i === step ? 'bg-amber-50 text-amber-700 border border-amber-200/60 shadow-sm' : i < step ? 'text-emerald-600' : 'text-slate-400'}`}>
                                 {i < step ? <CheckCircle className="w-4 h-4" /> : <s.icon className="w-4 h-4" />}
                                 <span className="hidden sm:inline">{s.title}</span>
                             </div>
@@ -164,7 +167,7 @@ export default function SolarBuyerOnboarding() {
                     </div>
                 )}
 
-                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <div className="bg-white rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 p-6 sm:p-8">
                     <h2 className="text-lg font-bold text-slate-900 mb-1">{STEPS[step].title}</h2>
                     <p className="text-sm text-slate-500 mb-6">{STEPS[step].desc}</p>
 
@@ -172,15 +175,15 @@ export default function SolarBuyerOnboarding() {
                         <div className="space-y-4">
                             <div className="flex gap-2">
                                 <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSearch()} placeholder="Search location in India…" className={inputCls} />
-                                <button onClick={handleSearch} disabled={isSearching} className="px-4 py-3 bg-orange-500 text-white rounded-xl font-bold text-sm hover:bg-orange-400 transition-all disabled:opacity-50 shrink-0">
+                                <button onClick={handleSearch} disabled={isSearching} className="px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-bold text-sm hover:from-amber-400 hover:to-orange-400 transition-all disabled:opacity-50 shrink-0 shadow-lg shadow-amber-400/20">
                                     {isSearching ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
                                 </button>
                             </div>
-                            <div ref={mapContainerRef} className="h-64 rounded-xl border border-slate-200 overflow-hidden z-0" />
+                            <div ref={mapContainerRef} className="h-64 rounded-xl border border-slate-200 overflow-hidden z-0 shadow-sm" />
                             <div><label className={labelCls}>Address</label><textarea value={address} onChange={e => setAddress(e.target.value)} rows={2} className={inputCls} /></div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div><label className={labelCls}>State</label><input value={state} onChange={e => setState(e.target.value)} className={inputCls} /></div>
-                                <div><label className={labelCls}>Coordinates</label><input value={`${lat.toFixed(4)}, ${lng.toFixed(4)}`} readOnly className={`${inputCls} bg-slate-100`} /></div>
+                                <div><label className={labelCls}>Coordinates</label><input value={`${lat.toFixed(4)}, ${lng.toFixed(4)}`} readOnly className={`${inputCls} text-slate-400 bg-slate-100`} /></div>
                             </div>
                         </div>
                     )}
@@ -190,11 +193,12 @@ export default function SolarBuyerOnboarding() {
                             <div><label className={labelCls}>Digital Meter Number</label><input value={digitalMeterNumber} onChange={e => setDigitalMeterNumber(e.target.value)} placeholder="e.g. DM-2024-78901" className={inputCls} /></div>
                             <div>
                                 <label className={labelCls}>Electricity Bill (PDF)</label>
-                                <div className="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-orange-300 transition-colors">
+                                <div className="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-amber-400/60 hover:bg-amber-50/30 transition-colors">
                                     <input type="file" accept=".pdf" onChange={e => setElectricityBill(e.target.files?.[0] || null)} className="hidden" id="billUpload" />
                                     <label htmlFor="billUpload" className="cursor-pointer">
                                         <Upload className="w-8 h-8 text-slate-300 mx-auto mb-2" />
                                         <p className="text-sm font-medium text-slate-500">{electricityBill ? electricityBill.name : 'Click to upload PDF'}</p>
+                                        <p className="text-xs text-slate-400 mt-1">Max 10MB</p>
                                     </label>
                                 </div>
                             </div>
@@ -219,11 +223,11 @@ export default function SolarBuyerOnboarding() {
                             </button>
                         ) : <div />}
                         {step < STEPS.length - 1 ? (
-                            <button onClick={() => setStep(s => s + 1)} className="flex items-center gap-2 px-5 py-3 bg-orange-600 text-white font-bold rounded-xl hover:bg-orange-500 transition-all text-sm shadow-lg shadow-orange-500/20">
+                            <button onClick={() => setStep(s => s + 1)} className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-xl hover:from-amber-400 hover:to-orange-400 transition-all text-sm shadow-lg shadow-amber-400/20">
                                 Next <ChevronRight className="w-4 h-4" />
                             </button>
                         ) : (
-                            <button onClick={handleSubmit} disabled={isSubmitting} className="flex items-center gap-2 px-6 py-3 bg-orange-600 text-white font-bold rounded-xl hover:bg-orange-500 transition-all text-sm shadow-lg shadow-orange-500/20 disabled:opacity-50">
+                            <button onClick={handleSubmit} disabled={isSubmitting} className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-xl hover:from-amber-400 hover:to-orange-400 transition-all text-sm shadow-lg shadow-amber-400/20 disabled:opacity-50">
                                 {isSubmitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Saving…</> : <><CheckCircle className="w-4 h-4" /> Complete Setup</>}
                             </button>
                         )}

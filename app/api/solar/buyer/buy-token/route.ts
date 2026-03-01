@@ -30,21 +30,25 @@ export async function POST(req: NextRequest) {
         const { listingId } = await req.json();
         if (!listingId) return NextResponse.json({ error: 'Listing ID required' }, { status: 400 });
 
-        const listing = await SunTokenMarketListing.findById(listingId);
-        if (!listing || listing.status !== 'available') {
-            return NextResponse.json({ error: 'Listing not available' }, { status: 404 });
+        // Atomic update: find the listing only if still available, and mark it sold in one operation.
+        // This prevents two concurrent buyers from purchasing the same listing.
+        const listing = await SunTokenMarketListing.findOneAndUpdate(
+            { _id: listingId, status: 'available' },
+            { $set: { status: 'sold' } },
+            { new: true }
+        );
+        if (!listing) {
+            return NextResponse.json({ error: 'Listing not available or already sold' }, { status: 409 });
         }
 
         // Cannot buy own tokens
         if (String(listing.sellerId) === String(decoded.id)) {
+            // Revert since we already marked it sold
+            await SunTokenMarketListing.findByIdAndUpdate(listingId, { $set: { status: 'available' } });
             return NextResponse.json({ error: 'Cannot purchase your own tokens' }, { status: 400 });
         }
 
         const totalAmount = listing.tokens * listing.pricePerToken;
-
-        // Mark listing as sold
-        listing.status = 'sold';
-        await listing.save();
 
         // Audit hash
         const lastLog = await AuditLog.findOne({}).sort({ timestamp: -1 });
