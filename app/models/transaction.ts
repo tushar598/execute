@@ -19,7 +19,7 @@ const TransactionSchema = new Schema<ITransaction>(
         fromId: { type: String, required: true },
         toId: { type: String, required: true },
         projectId: { type: String },
-        creditAmount: { type: Number, required: true, min: 1 },
+        creditAmount: { type: Number, required: true, min: [0, 'Credit amount must be at least 0'] },
         pricePerCredit: { type: Number, required: true, min: 0 },
         totalValue: { type: Number, required: true, min: 0 },
         status: { type: String, default: 'pending', enum: ['completed', 'pending', 'failed'] },
@@ -32,5 +32,9 @@ TransactionSchema.index({ toId: 1 })
 TransactionSchema.index({ projectId: 1 })
 TransactionSchema.index({ createdAt: -1 })
 
-export const Transaction =
-    mongoose.models.Transaction || mongoose.model<ITransaction>('Transaction', TransactionSchema)
+// Force reload of schema in dev
+if (mongoose.models && mongoose.models.Transaction) {
+    delete mongoose.models.Transaction;
+}
+
+export const Transaction = mongoose.model<ITransaction>('Transaction', TransactionSchema);
