@@ -302,7 +302,7 @@ export default function Dashboard() {
                         <div className="w-8 h-8 sm:w-10 sm:h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0">
                             <Leaf className="w-4 h-4 sm:w-6 sm:h-6" />
                         </div>
-                        <h1 className="text-base sm:text-xl font-bold text-slate-900 tracking-tight">Grento Dashboard</h1>
+                        <h1 className="text-base sm:text-2xl font-semibold text-slate-900 tracking-tight">EcoTrade</h1>
                     </div>
 
                     {/* Desktop nav */}

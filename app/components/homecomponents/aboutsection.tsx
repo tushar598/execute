@@ -47,8 +47,8 @@ export default function About() {
                         <span className="about-text inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 border border-teal-100 rounded-full text-xs font-bold text-teal-700 uppercase tracking-widest mb-6">
                             How It Works
                         </span>
-                        <h2 className="about-text text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-slate-900 tracking-tight">
-                            From source to grid — a transparent energy journey
+                        <h2 className="about-text text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight font-weight-600 mb-6 text-slate-900 tracking-tight">
+                            From source to grid, a transparent energy journey
                         </h2>
                         <p className="about-text text-base sm:text-lg text-slate-500 leading-relaxed mb-8">
                             Our dual marketplace connects <span className="text-slate-900 font-semibold">renewable energy producers</span> and <span className="text-slate-900 font-semibold">sustainable farmers</span> with <span className="text-slate-900 font-semibold">consumers and corporations</span>. Trade Sun Tokens from excess solar power or verified Carbon Credits from farming. Every transaction is audited, hashed, and traceable.

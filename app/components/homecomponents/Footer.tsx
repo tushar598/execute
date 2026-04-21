@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Leaf } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
     return (
@@ -10,7 +10,13 @@ export default function Footer() {
                     <div className="sm:col-span-2 lg:col-span-2">
                         <div className="flex items-center gap-2.5 mb-5">
                             <div className="w-9 h-9 bg-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/25">
-                                <Leaf className="w-5 h-5 text-white" />
+                                <Image
+                                    src="/icon.png"
+                                    alt="EcoTrade Logo"
+                                    width={150}
+                                    height={40}
+                                    className="h-10 w-auto object-contain"
+                                />
                             </div>
                             <span className="font-bold text-xl tracking-tight">
                                 Eco<span className="text-emerald-400">Trade</span>

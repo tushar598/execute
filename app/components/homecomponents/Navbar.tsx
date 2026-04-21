@@ -1,8 +1,9 @@
 "use client";
 import Link from 'next/link';
-import { Menu, X, Leaf } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 import gsap from 'gsap';
 
 export default function Navbar() {
@@ -34,7 +35,13 @@ export default function Navbar() {
                         ? 'bg-teal-600 shadow-lg shadow-teal-500/25'
                         : 'bg-white/15 backdrop-blur-sm border border-white/20'
                         }`}>
-                        <Leaf className={`w-5 h-5 transition-colors ${scrolled ? 'text-white' : 'text-emerald-300'}`} />
+                        <Image 
+                        src="/icon.png" 
+                        alt="EcoTrade Logo" 
+                        width={150} 
+                        height={40} 
+                        className="h-10 w-auto object-contain"
+                    />
                     </div>
                     <span className={`font-bold text-xl tracking-tight transition-colors duration-300 ${scrolled ? 'text-slate-900' : 'text-white'}`}>
                         Eco<span className={`${scrolled ? 'text-teal-600' : 'text-emerald-300'}`}>Trade</span>

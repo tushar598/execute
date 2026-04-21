@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -31,9 +31,15 @@ export interface LeafletMapProps {
 
 export default function LeafletMap({ lat, lng, onLocationSelect }: LeafletMapProps) {
     const position: [number, number] = lat && lng ? [lat, lng] : [20.5937, 78.9629]; // Default: Centre of India
+    const [mapKey, setMapKey] = useState(0);
+
+    useEffect(() => {
+        setMapKey(prev => prev + 1);
+    }, []);
 
     return (
         <MapContainer
+            key={mapKey}
             center={position}
             zoom={lat && lng ? 13 : 5}
             className="w-full h-full"

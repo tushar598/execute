@@ -1,11 +1,12 @@
 "use client";
 
 import Link from 'next/link';
-import { ArrowLeft, Loader2, Leaf, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Loader2, Eye, EyeOff } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from "next/image";
 
 export default function Signup() {
     const containerRef = useRef(null);
@@ -104,7 +105,13 @@ export default function Signup() {
                     <div className="signup-content max-w-lg">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-12 h-12 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl flex items-center justify-center shadow-xl">
-                                <Leaf className="w-6 h-6 text-emerald-300" />
+                                <Image
+                                    src="/icon.png"
+                                    alt="EcoTrade Logo"
+                                    width={150}
+                                    height={40}
+                                    className="h-10 w-auto object-contain"
+                                />
                             </div>
                             <span className="font-bold text-2xl tracking-tight drop-shadow-lg">Carbon<span className="text-emerald-400">Credit</span></span>
                         </div>
@@ -134,7 +141,13 @@ export default function Signup() {
                     {/* Mobile brand (Visible only on small screens) */}
                     <div className="lg:hidden flex items-center gap-2 mb-8">
                         <div className="w-10 h-10 bg-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-600/20">
-                            <Leaf className="w-5 h-5 text-white" />
+                            <Image
+                                src="/icon.png"
+                                alt="EcoTrade Logo"
+                                width={150}
+                                height={40}
+                                className="h-10 w-auto object-contain"
+                            />
                         </div>
                         <span className="font-bold text-xl text-slate-900">Carbon<span className="text-teal-600">Credit</span></span>
                     </div>
@@ -172,10 +185,10 @@ export default function Signup() {
                                         type="button"
                                         onClick={() => setTradingMode(m)}
                                         className={`flex-1 py-3 px-2 text-xs sm:text-sm font-bold rounded-xl transition-all duration-300 ${tradingMode === m
-                                                ? m === 'credits'
-                                                    ? 'bg-white text-emerald-600 shadow-md ring-1 ring-black/5'
-                                                    : 'bg-white text-amber-600 shadow-md ring-1 ring-black/5'
-                                                : 'text-slate-500 hover:text-slate-800'
+                                            ? m === 'credits'
+                                                ? 'bg-white text-emerald-600 shadow-md ring-1 ring-black/5'
+                                                : 'bg-white text-amber-600 shadow-md ring-1 ring-black/5'
+                                            : 'text-slate-500 hover:text-slate-800'
                                             }`}
                                     >
                                         {m === 'credits' ? '🌿 Carbon Credits' : '☀️ Sun Tokens'}
